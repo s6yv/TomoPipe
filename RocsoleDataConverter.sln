@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDLL", "TestDLL\TestDLL.
 		{280C45E8-2AE4-4CA2-BFE5-81F5A4F5190C} = {280C45E8-2AE4-4CA2-BFE5-81F5A4F5190C}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocsoleSimulator", "RocsoleSimulator\RocsoleSimulator.csproj", "{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{F51CF9BB-027D-4799-A7C7-EB73F601AA22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F51CF9BB-027D-4799-A7C7-EB73F601AA22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F51CF9BB-027D-4799-A7C7-EB73F601AA22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

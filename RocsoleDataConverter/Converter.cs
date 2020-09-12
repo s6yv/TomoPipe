@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -131,15 +132,19 @@ namespace RocsoleDataConverter
             {
                 try
                 {
-                    int bt = _TCPClient.Receive(_bytesReceived);
-                    string newmsg = Encoding.ASCII.GetString(_bytesReceived);
+                    NetworkStream ns = new NetworkStream(_TCPClient);
+                    StreamReader sr = new StreamReader(ns);
+                    //int bt = _TCPClient.Receive(_bytesReceived);
+                    //string newmsg = Encoding.ASCII.GetString(_bytesReceived, 0, bt);
+                    string newmsg = sr.ReadLine();
+                    //Console.WriteLine(newmsg);
                     lastRocsoleFrame.FilterFrame(newmsg, true);
                    
 
                     //processing
 
 
-                    Console.WriteLine("Received from TomoKISStudio (" + bt + "b): " + newmsg);
+                    Console.WriteLine("Average = " + lastRocsoleFrame.lastFilteredAverage);
                 }
                 catch (SocketException)
                 {

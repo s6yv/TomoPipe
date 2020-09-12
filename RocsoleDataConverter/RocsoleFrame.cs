@@ -42,9 +42,10 @@ namespace RocsoleDataConverter
 
                 return true;
             }
-            catch (JsonException)
+            catch (JsonException e)
             {
                 Console.WriteLine("Error parsing JSON message");
+                Console.WriteLine(e.Message);
             }
             return false;
         }
@@ -64,14 +65,17 @@ namespace RocsoleDataConverter
                 FilterFrameNormalized();
             else
                 FilterFrameRAW();
-            lastFilteredAverage = Filtered.data.Average();
+            if (Filtered.data.Count() > 0)
+                lastFilteredAverage = Filtered.data.Average();
         }
         internal void FilterFrameNormalized()
         {
+            Filtered.data = new List<double>(normalized.data);
 
         }
         internal void FilterFrameRAW()
         {
+            Filtered.data = new List<double>(ROCSOLE_raw.data);
 
         }
     }

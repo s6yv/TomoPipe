@@ -21,6 +21,8 @@ namespace TestDLL
 
         private void button1_Click(object sender, EventArgs e)
         {
+            obj.TomoKISStudioIP = "127.0.0.1";
+            obj.TomoKISStudioPort = 7;
             double y = obj.ProcessNextFrame();
             label4Y.Text = y.ToString("0.##");
         }
