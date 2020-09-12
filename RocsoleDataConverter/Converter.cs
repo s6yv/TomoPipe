@@ -5,7 +5,11 @@ using System.Text;
 
 namespace RocsoleDataConverter
 {
-    public class Class1
+    public class Converter
     {
+        private void GetNestMeasurement()
+        {
+
+        }
     }
 }
