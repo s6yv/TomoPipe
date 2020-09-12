@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 
 namespace RocsoleDataConverter
 {
@@ -19,51 +21,165 @@ namespace RocsoleDataConverter
 
         private String _TomoKISStudioIP;
         private int _TomoKISStudioPort;
-        private List<double> lastRocsoleFrame;
-        private List<double> lastFilteredFrame;
+        private bool _ConsiderNormalizedData = true;
+        private RocsoleFrame lastRocsoleFrame;
+        internal int _currentRocsoleFrameIndex;
+        internal string currentRocsoleFrameTimeStamp;
+        private double lastAverage;
+        //private int lastRocsoleFrameIndex;
         private double _factorA;
         private double _factorB;
 
         static private Socket _UDPSocket = null;
         static private EndPoint _UDPEndPoint = null;
         static private bool _UDPSocketInitialized = false;
+        static private Socket _TCPClient = null;
+        static private bool _TCPClientConnected = false;
+        static private Thread _receiver = null;
 
         public string TomoKISStudioIP { get => _TomoKISStudioIP; set => _TomoKISStudioIP = value; }
         public int TomoKISStudioPort { get => _TomoKISStudioPort; set => _TomoKISStudioPort = value; }
+        public bool ConsiderNormalizedData { get => _ConsiderNormalizedData; set => _ConsiderNormalizedData = value; }
+        public int CurrentRocsoleFrameIndex { get => _currentRocsoleFrameIndex; /*set => _currentRocsoleFrameIndex = value;*/ }
+        public string CurrentRocsoleFrameTimeStamp { get => currentRocsoleFrameTimeStamp; /*set => currentRocsoleFrameTimeStamp = value;*/ }
         public double FactorA { get => _factorA; set => _factorA = value; }
         public double FactorB { get => _factorB; set => _factorB = value; }
 
         public Converter() {
-            lastRocsoleFrame = new List<double>();
-            lastFilteredFrame = new List<double>();
+            lastRocsoleFrame = new RocsoleFrame();
+            _currentRocsoleFrameIndex = -1;
+            currentRocsoleFrameTimeStamp = "";
+            lastAverage = -1;
+            //lastRocsoleFrameIndex = -1;
             _factorA = 20.4;
             _factorB = 16;
             AllocConsole();
-            Console.WriteLine("Converter initialized:\n Used equation: y = "+ _factorA.ToString("0.##") + "x+" + _factorB.ToString("0.##"));
+            Console.WriteLine("Converter initialized:\n Using equation: y = "+ _factorA.ToString("0.##") + "x+" + _factorB.ToString("0.##"));
             InitializeUDPSocket("127.0.0.1", 7);
         }
 
-        //connect to TomoKISStudio and get current measurement frame
-        //store it to lastRocsoleFrame
-        private void GetFrameFromRocsole()
+        public bool Connect2TomoKISStudio(string address, int port)
         {
+            if (CloseTomoKISStudioConnection() == false)
+                return false;
+            // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/exceptions/exception-handling
+            // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.connect?view=netframework-4.8#System_Net_Sockets_Socket_Connect_System_Net_IPAddress_System_Int32_
+            try
+            {
+                _TCPClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            }
+            catch (SocketException)
+            {
+                Console.WriteLine("Problem creating TCPSocket");
+                return false;
+            }
 
+            // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.connect?view=netframework-4.8#System_Net_Sockets_Socket_Connect_System_Net_IPAddress_System_Int32_
+            try
+            {
+                TomoKISStudioIP = address;
+                TomoKISStudioPort = port;
+                _TCPClient.Connect(TomoKISStudioIP, TomoKISStudioPort);
+                _TCPClientConnected = true;
+                Console.WriteLine("Connected to TomoKISStudio Rocsole module on "+address+":"+port);
+                _receiver = new Thread(ReceiverThread);
+                _receiver.IsBackground = true;
+                _receiver.Start();
+                return true;
+            }
+            catch (SocketException)
+            {
+                Console.WriteLine("Problem connecting to TomoKISStudio Rocsole module");
+            }
+            catch (ThreadStateException)
+            {
+                Console.WriteLine("The thread has already been started.");
+            }
+            catch (OutOfMemoryException)
+            {
+                Console.WriteLine("There is not enough memory available to start this thread.");
+            }
+            StopTcpReceiver();
+            return false;
         }
 
-        //filter out only the opposite electrodes measurements from lastRocsoleFrame
-        //and store them to lastFilteredFrame
-        private void FilterFrame()
+        public bool CloseTomoKISStudioConnection()
         {
-
+            try
+            {
+                if (_TCPClientConnected)
+                {
+                    _TCPClient.Close();
+                    _TCPClientConnected = false;
+                }
+                return true;
+            }
+            catch (SocketException)
+            {
+                Console.WriteLine("Problem with disconnection the TomoKISStudio Rocsole module");
+            }
+            return true;
         }
+
+        private void ReceiverThread()
+        {
+            if (!_TCPClientConnected)
+                return;
+            Console.WriteLine("Receiver thread started ....");
+            byte[] _bytesReceived = new byte[100000];
+            while (_TCPClientConnected)
+            {
+                try
+                {
+                    int bt = _TCPClient.Receive(_bytesReceived);
+                    string newmsg = Encoding.ASCII.GetString(_bytesReceived);
+                    lastRocsoleFrame.FilterFrame(newmsg, true);
+                   
+
+                    //processing
+
+
+                    Console.WriteLine("Received from TomoKISStudio (" + bt + "b): " + newmsg);
+                }
+                catch (SocketException)
+                {
+                    Console.WriteLine("Problem receiving data from TomoKISStudio Rocsole module");
+                    StopTcpReceiver();
+                }
+            }
+        }
+        static private void StopTcpReceiver()
+        {
+            try
+            {
+                _TCPClientConnected = false;
+                _TCPClient.Close();
+            }
+            catch (SocketException)
+            {
+                Console.WriteLine("Failed to stop TcpReceiver.");
+            }
+        }
+
+        
 
         //The opposite electrode data from lastFilteredFrame are averaged to get a single current value x
         //then returns y = _factorA * x + _factorB
         public double ProcessNextFrame()
         {
-            double x = 1;
-            double y = _factorA * x + _factorB;
-            Console.WriteLine("Y = " + y.ToString("0.##"));
+            if (!_TCPClientConnected)
+                Connect2TomoKISStudio(_TomoKISStudioIP, _TomoKISStudioPort);
+            if (!_TCPClientConnected)
+                return -1;
+
+            if (_currentRocsoleFrameIndex != lastRocsoleFrame.CurrentMeasurementNo)
+            {
+                lastAverage = lastRocsoleFrame.lastFilteredAverage;
+                _currentRocsoleFrameIndex = lastRocsoleFrame.CurrentMeasurementNo;
+            }
+
+            double y = _factorA * lastAverage + _factorB;
+            Console.WriteLine("Y = " + y.ToString("0.##") + " for frame index = " + _currentRocsoleFrameIndex);
 
 
             SendValue(y);

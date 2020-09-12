@@ -1,0 +1,48 @@
+﻿{
+  "header": {
+    "name": "ect_potentials",
+    "service": "ET3",
+    "channel": "et3_measurements",
+    "description": "jakiś opis tekstowy; dowolny",
+    "mapping": {
+      //"table": "nazwa tabeli w bazie danych"
+    
+    }
+  },
+  "fields": [
+    {
+      "name": "electrodes",
+      "description": "Liczba elektrod wykorzystana w danym pomiarze",
+      "type": {
+        "name": "integer",
+        "minimum": 2,
+        "maximum": 64
+      },
+      "mapping": {
+        //"column": "electrodes",
+        //"serialization": "tostring"
+      
+      }
+    },
+    {
+      "name": "potentials",
+      "description": "Macierz wartości pojemności dla danego pomiaru",
+      "type": {
+        "name": "matrix",
+        "minrows": 1,
+        "mincols": 1,
+        "maxrows": 63,
+        "maxcols": 63,
+        "default": 0.0,
+        "type": {
+          "name": "real"
+        }
+      },
+      "mapping": {
+        //"column": "measurements",
+        //"serialization": "multiline_with_spaces"
+
+      }
+    }
+  ]
+}

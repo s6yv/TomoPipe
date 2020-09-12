@@ -1,0 +1,90 @@
+﻿{
+  "header": {
+    "name": "schema_status", // nazwa schematu walidacyjnego
+    "service": "*", // nazwa usługi generującej komunikaty
+    "channel": "status", // nazwa kanału, jakim dany komunikat jest przesyłany
+    "description": "jakiś opis tekstowy; dowolny",
+    "mapping": {
+      //"table": "nazwa tabeli w bazie danych"
+
+    }
+  },
+
+  "fields": [
+    {
+      "name": "service",
+      "description": "Nazwa usługi generującej komunikat, nadawany kanałem status",
+      "type": {
+        "name": "string",
+        "nullable": false, // nazwa usługi musi być zawsze podana
+        "minlength": 3 // nazwa usługi nie może być krótsza niż 3 znaki
+      },
+      "mapping": {
+        // ???? do ustalenia
+
+      }
+    },
+    {
+      "name": "publishes",
+      "description": "Lista nazw kanałów, którymi dana usługa publikuje dane (np. pomiary)",
+      "type": {
+        "name": "vector",
+        "minlength": 0,
+        "maxlength": 128,
+        "type": {
+          "name": "string",
+          "nullable": false // nazwa usługi musi być zawsze podana
+        }
+      },
+      "mapping": {
+        // ???? do ustalenia
+
+      }
+    },
+    {
+      "name": "subscribes",
+      "description": "Lista nazw kanałów, na których dana usługa nasłuchuje",
+      "type": {
+        "name": "vector",
+        "minlength": 0,
+        "maxlength": 128,
+        "type": {
+          "name": "string",
+          "nullable": false // nazwa usługi musi być zawsze podana
+        }
+      },
+      "mapping": {
+        // ???? do ustalenia
+
+      }
+    },
+    {
+      "name": "next_alive_interval",
+      "description": "Czas [ms] do następnego wygenerowania komunikatu na kanale status, przez tę usługę",
+      "type": {
+        "name": "integer",
+        "minimum": 0,
+        "maximum": 4294967290, // 0xfffffffa
+        "nullable": false // wartość wymagna
+      },
+      "mapping": {
+        // ???? do ustalenia
+
+      }
+    },
+    {
+      "name": "timeout",
+      "description": "Czas [ms] jaki musi minąć od punktu czasowego, wynikającego z parametru next_alive_interval aby usługę nadawczą uznać za wyłączoną.",
+      "type": {
+        "name": "integer",
+        "minimum": 0,
+        "maximum": 4294967291, // 0xfffffffb
+        "nullable": false // wartość wymagna
+      },
+      "mapping": {
+        // ???? do ustalenia
+
+      }
+    }
+  ]
+}

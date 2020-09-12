@@ -1,0 +1,3 @@
+[submodule "validation_schemas"]
+	path = validation_schemas
+	url = https://gitlabplatom.cti.p.lodz.pl/tjaworski/validation_schemas.git
