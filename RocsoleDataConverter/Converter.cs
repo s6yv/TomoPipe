@@ -22,6 +22,7 @@ namespace RocsoleDataConverter
 
         private String _TomoKISStudioIP;
         private int _TomoKISStudioPort;
+        private int _ElectrodesCount;
         private bool _ConsiderNormalizedData = true;
         private RocsoleFrame lastRocsoleFrame;
         internal int _currentRocsoleFrameIndex;
@@ -45,9 +46,11 @@ namespace RocsoleDataConverter
         public string CurrentRocsoleFrameTimeStamp { get => currentRocsoleFrameTimeStamp; /*set => currentRocsoleFrameTimeStamp = value;*/ }
         public double FactorA { get => _factorA; set => _factorA = value; }
         public double FactorB { get => _factorB; set => _factorB = value; }
+        public int ElectrodesCount { get => _ElectrodesCount; set => _ElectrodesCount = value; }
 
         public Converter() {
             lastRocsoleFrame = new RocsoleFrame();
+            _ElectrodesCount = 16;
             _currentRocsoleFrameIndex = -1;
             currentRocsoleFrameTimeStamp = "";
             lastAverage = -1;
@@ -138,7 +141,7 @@ namespace RocsoleDataConverter
                     //string newmsg = Encoding.ASCII.GetString(_bytesReceived, 0, bt);
                     string newmsg = sr.ReadLine();
                     //Console.WriteLine(newmsg);
-                    lastRocsoleFrame.FilterFrame(newmsg, true);
+                    lastRocsoleFrame.FilterFrame(newmsg, _ConsiderNormalizedData, _ElectrodesCount);
                    
 
                     //processing
@@ -149,6 +152,11 @@ namespace RocsoleDataConverter
                 catch (SocketException)
                 {
                     Console.WriteLine("Problem receiving data from TomoKISStudio Rocsole module");
+                    StopTcpReceiver();
+                }
+                catch (IOException)
+                {
+                    Console.WriteLine("Disconnected from TomoKISStudio Rocsole module");
                     StopTcpReceiver();
                 }
             }
