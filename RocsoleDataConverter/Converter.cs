@@ -18,6 +18,8 @@ namespace RocsoleDataConverter
     /// <remarks>
     /// How to use DLL in LabView see:
     /// https://www.youtube.com/watch?v=hE0TVHqZjBI
+	/// ------------
+	/// To view this doc see https://github.com/EWSoftware/SHFB or https://www.helixoft.com/vsdocman/overview.html
     /// </remarks>
     public class Converter
     {
@@ -30,7 +32,7 @@ namespace RocsoleDataConverter
         private String _UDPIP = "127.0.0.1";
         private int _UDPPort = 777;
         private int _ElectrodesCount;
-        private bool _ConsiderNormalizedData = true;
+        private bool _ConsiderNormalizedData = false;
         private RocsoleFrame lastRocsoleFrame;
         internal int _currentRocsoleFrameIndex;
         internal string currentRocsoleFrameTimeStamp;
@@ -63,9 +65,9 @@ namespace RocsoleDataConverter
         /// <value>Sets the electrodes count of the sensor.</value>
         public int ElectrodesCount { get => _ElectrodesCount; set => _ElectrodesCount = value; }
         /// <value>The IP address of LabView module.</value>
-        public string UDPIP { get => _UDPIP; set { _UDPIP = value; InitializeUDPSocket(_UDPIP, _UDPPort); } }
+        public string UDPIP { get => _UDPIP; set { _UDPIP = value; _UDPSocketInitialized = false; } }
         /// <value>The UDP port number the LabViewmodule is listening on.</value>
-        public int UDPPort { get => _UDPPort; set { _UDPPort = value; InitializeUDPSocket(_UDPIP, _UDPPort); } }
+        public int UDPPort { get => _UDPPort; set { _UDPPort = value; _UDPSocketInitialized = false;  } }
 
         public Converter() {
             lastRocsoleFrame = new RocsoleFrame();
@@ -78,7 +80,7 @@ namespace RocsoleDataConverter
             _factorB = 16;
             AllocConsole();
             Console.WriteLine("Converter initialized:\n Using equation: y = "+ _factorA.ToString("0.##") + "x+" + _factorB.ToString("0.##"));
-            InitializeUDPSocket(_UDPIP, _UDPPort);
+            //InitializeUDPSocket(_UDPIP, _UDPPort);
         }
 
         /// <summary>
@@ -171,34 +173,67 @@ namespace RocsoleDataConverter
                 return;
             Console.WriteLine("Receiver thread started ....");
             byte[] _bytesReceived = new byte[100000];
-            while (_TCPClientConnected)
+            string msg4processing = "";
+            string msg4future = "";
+            string newmsg;
+            int indexOfChar = 0;
+            try
             {
-                try
+                //NetworkStream ns = new NetworkStream(_TCPClient);
+                //StreamReader sr = new StreamReader(ns);
+                while (_TCPClientConnected)
                 {
-                    NetworkStream ns = new NetworkStream(_TCPClient);
-                    StreamReader sr = new StreamReader(ns);
-                    //int bt = _TCPClient.Receive(_bytesReceived);
-                    //string newmsg = Encoding.ASCII.GetString(_bytesReceived, 0, bt);
-                    string newmsg = sr.ReadLine();
-                    //Console.WriteLine(newmsg);
-                    lastRocsoleFrame.FilterFrame(newmsg, _ConsiderNormalizedData, _ElectrodesCount);
-                   
+                    if (msg4future.IndexOf(";", 0, msg4future.Length) == -1)
+                    {
+                        msg4processing = msg4future;
+                        int bt = _TCPClient.Receive(_bytesReceived);
+                        newmsg = Encoding.ASCII.GetString(_bytesReceived, 0, bt);
+                    }
+                    else
+                        newmsg = msg4future;
+                                                                                            //Console.WriteLine("newmsg:" + newmsg);
+
+
+                    indexOfChar = newmsg.IndexOf(";", 0, newmsg.Length);
+                    if (indexOfChar == -1)
+                    {
+                        msg4future += newmsg;
+                        continue;
+                    }
+                    msg4processing += newmsg.Substring(0, indexOfChar);
+                                                                                            //Console.WriteLine("msg4processing:" + msg4processing);
+                    //if (indexOfChar < newmsg.Length - 1)
+                        msg4future = newmsg.Substring(indexOfChar + 1);
+                    //else
+                    //    msg4future = "";
+                                                                                            //Console.WriteLine("msg4future:" + msg4future);
+
+
+
+
+                    //                    string newmsg = sr.Read()
+                    lastRocsoleFrame.FilterFrame(msg4processing, _ConsiderNormalizedData, _ElectrodesCount);
+                    if (_ConsiderNormalizedData)
+                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp+ "; Average normalized= " + lastRocsoleFrame.lastFilteredAverage);
+                    else
+                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp + "; Average RAW = " + lastRocsoleFrame.lastFilteredAverage);
+
+                    msg4processing = "";
 
                     //processing
 
 
-                    Console.WriteLine("Average = " + lastRocsoleFrame.lastFilteredAverage);
                 }
-                catch (SocketException)
-                {
-                    Console.WriteLine("Problem receiving data from TomoKISStudio Rocsole module");
-                    StopTcpReceiver();
-                }
-                catch (IOException)
-                {
-                    Console.WriteLine("Disconnected from TomoKISStudio Rocsole module");
-                    StopTcpReceiver();
-                }
+            }
+            catch (SocketException)
+            {
+                Console.WriteLine("Problem receiving data from TomoKISStudio Rocsole module");
+                StopTcpReceiver();
+            }
+            catch (IOException)
+            {
+                Console.WriteLine("Disconnected from TomoKISStudio Rocsole module");
+                StopTcpReceiver();
             }
         }
         private void StopTcpReceiver()
@@ -262,7 +297,10 @@ namespace RocsoleDataConverter
         public double ProcessNextFrame()
         {
             if (!_TCPClientConnected)
+            {
                 Connect2TomoKISStudio(_TomoKISStudioIP, _TomoKISStudioPort);
+                Thread.Sleep(1000);
+            }
             if (!_TCPClientConnected)
                 return -1;
 
@@ -273,12 +311,9 @@ namespace RocsoleDataConverter
             }
 
             double y = _factorA * lastAverage + _factorB;
-            Console.WriteLine("Y = " + y.ToString("0.##") + " for frame index = " + _currentRocsoleFrameIndex);
+            Console.WriteLine("Y = " + y.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
 
-            if (!_UDPSocketInitialized)
-                InitializeUDPSocket("127.0.0.1", 777);
-
-            SendValue(y);
+            SendValue(y, "0.##########");
 
             return y;
         }
@@ -301,8 +336,9 @@ namespace RocsoleDataConverter
         {
             if (!_UDPSocketInitialized)
             {
-                Console.WriteLine("First set the UDPIP and UDPPort properties to initialize.");
-                return false;
+                //Console.WriteLine("First set the UDPIP and UDPPort properties to initialize.");
+                //return false;
+                InitializeUDPSocket(_UDPIP, _UDPPort);
             }
             // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.sendto?view=netframework-4.8#System_Net_Sockets_Socket_SendTo_System_Byte___System_Net_EndPoint_
             try

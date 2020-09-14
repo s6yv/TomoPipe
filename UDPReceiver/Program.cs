@@ -56,11 +56,11 @@ namespace UDPReceiver
                 byte[] bytesReceived = _server.Receive(ref _groupEP);
                 string message = Encoding.ASCII.GetString(bytesReceived);
 
-                Console.WriteLine($"Received from client ({bytesReceived.Length}b): {message}");
+                Console.WriteLine($"Received ({bytesReceived.Length}b): {message}");
 
-                byte[] bytesToSend = Encoding.ASCII.GetBytes(message);
-                _server.Send(bytesToSend, bytesToSend.Length, _groupEP);
-                Console.WriteLine($"Sent to client ({bytesToSend.Length}b): {message}");
+//                byte[] bytesToSend = Encoding.ASCII.GetBytes(message);
+//                _server.Send(bytesToSend, bytesToSend.Length, _groupEP);
+//                Console.WriteLine($"Sent to client ({bytesToSend.Length}b): {message}");
             }
             catch (ArgumentNullException)
             {

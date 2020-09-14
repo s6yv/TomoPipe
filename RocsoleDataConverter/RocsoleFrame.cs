@@ -65,34 +65,55 @@ namespace RocsoleDataConverter
                 FilterFrameNormalized(elec);
             else
                 FilterFrameRAW(elec);
+
+
+
+
             if (Filtered.data.Count() > 0)
                 lastFilteredAverage = Filtered.data.Average();
         }
         internal void FilterFrameNormalized(int elec)
         {
-            Filtered.data = new List<double>(normalized.data);
+            //Filtered.data = new List<double>(normalized.data);
             int meas = (int)(elec * (elec - 1) / 2);
-            //if (normalized.size != meas) {
-            //    Console.WriteLine("Error while filtering opposite electrodes pairs");
-            //    Console.WriteLine("Input electrodes number " + elec + " not compatible with frame size " + normalized.size);
-            //    return;
-            //}
-            //Filtered.data.Add(normalized.data.ElementAt((int)(elec / 2 - 1)));
+            if (normalized.size != meas) {
+                Console.WriteLine("Error while filtering opposite electrodes pairs");
+                Console.WriteLine("Input electrodes number " + elec + " not compatible with frame size " + normalized.size);
+                return;
+            }
+            Filtered.data.Add(normalized.data.ElementAt((int)(elec / 2 - 1)));
             int lastValue = (int)(elec / 2 - 1);
             //string indexes = ""+lastValue+";";
             for (int i = 2; i <= (int)(elec/2); i++)
             {
                 int index = lastValue + elec - (i - 1);
                 lastValue = index;
-                //Filtered.data.Add(normalized.data.ElementAt(index));
+                Filtered.data.Add(normalized.data.ElementAt(index));
                 //indexes += " " + index + ";";
             }
             //Console.WriteLine(indexes);
         }
         internal void FilterFrameRAW(int elec)
         {
-            Filtered.data = new List<double>(ROCSOLE_raw.data);
-
+            //Filtered.data = new List<double>(ROCSOLE_raw.data);
+            int meas = elec * elec;
+            if (ROCSOLE_raw.size != meas)
+            {
+                Console.WriteLine("Error while filtering opposite electrodes pairs");
+                Console.WriteLine("Input electrodes number " + elec + " not compatible with frame size " + ROCSOLE_raw.size);
+                return;
+            }
+            Filtered.data.Add(ROCSOLE_raw.data.ElementAt((int)(elec / 2)));
+            int lastValue = (int)(elec / 2);
+            //string indexes = ""+lastValue+";";
+            for (int i = 2; i <= (int)(elec / 2); i++)
+            {
+                int index = lastValue + elec + 1;
+                lastValue = index;
+                Filtered.data.Add(ROCSOLE_raw.data.ElementAt(index));
+                //indexes += " " + index + ";";
+            }
+            //Console.WriteLine(indexes);
         }
     }
 }

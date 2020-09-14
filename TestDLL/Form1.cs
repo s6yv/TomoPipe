@@ -28,10 +28,12 @@ namespace TestDLL
         {
             textBox_IP.Enabled = false;
             textBox_port.Enabled = false;
+            textBox_UDPIP.Enabled = false;
+            textBox_UDPPort.Enabled = false;
             textBox_Electrodes.Enabled = false;
 
             double y = obj.ProcessNextFrame();
-            textBox_Y.Text = "Y = " + y.ToString("0.##");
+            textBox_Y.Text = "Y = " + y.ToString("0.#############");
         }
 
         private void button_changeIP_Click(object sender, EventArgs e)
@@ -89,6 +91,12 @@ namespace TestDLL
             textBox_Electrodes.Enabled = true;
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            textBox_UDPIP.Enabled = true;
+            textBox_UDPPort.Enabled = true;
+        }
+
         private void textBox_IP_TextChanged(object sender, EventArgs e)
         {
             obj.TomoKISStudioIP = textBox_IP.Text; ;
@@ -100,6 +108,24 @@ namespace TestDLL
             try
             {
                 obj.TomoKISStudioPort = Int32.Parse(textBox_port.Text);
+            }
+            catch (Exception ex)
+            {
+                textBox_Error.Text = ex.Message;
+            }
+        }
+
+        private void textBox_UDPIP_TextChanged(object sender, EventArgs e)
+        {
+            obj.UDPIP = textBox_UDPIP.Text;
+        }
+
+        private void textBox_UDPPort_TextChanged(object sender, EventArgs e)
+        {
+            textBox_Error.Text = "";
+            try
+            {
+                obj.UDPPort = Int32.Parse(textBox_UDPPort.Text);
             }
             catch (Exception ex)
             {
