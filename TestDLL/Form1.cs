@@ -132,5 +132,18 @@ namespace TestDLL
                 textBox_Error.Text = ex.Message;
             }
         }
+
+        private void textBox_C_TextChanged(object sender, EventArgs e)
+        {
+            textBox_Error.Text = "";
+            try
+            {
+                obj.FactorC = Double.Parse(textBox_C.Text);
+            }
+            catch (Exception ex)
+            {
+                textBox_Error.Text = ex.Message;
+            }
+        }
     }
 }

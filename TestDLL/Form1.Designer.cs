@@ -58,6 +58,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox_C = new System.Windows.Forms.TextBox();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -326,6 +328,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.textBox_C);
+            this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Location = new System.Drawing.Point(6, 212);
             this.groupBox4.Name = "groupBox4";
@@ -333,6 +337,24 @@
             this.groupBox4.TabIndex = 33;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Factors for processing";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(255, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "C";
+            // 
+            // textBox_C
+            // 
+            this.textBox_C.Location = new System.Drawing.Point(278, 28);
+            this.textBox_C.Name = "textBox_C";
+            this.textBox_C.Size = new System.Drawing.Size(100, 22);
+            this.textBox_C.TabIndex = 2;
+            this.textBox_C.Text = "1";
+            this.textBox_C.TextChanged += new System.EventHandler(this.textBox_C_TextChanged);
             // 
             // Form1
             // 
@@ -371,6 +393,7 @@
             this.Name = "Form1";
             this.Text = "DLL tester";
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,6 +431,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox_C;
     }
 }
 
