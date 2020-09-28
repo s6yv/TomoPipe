@@ -58,8 +58,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.textBox_C = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -139,7 +139,7 @@
             // 
             // textBox_factorA
             // 
-            this.textBox_factorA.Location = new System.Drawing.Point(36, 239);
+            this.textBox_factorA.Location = new System.Drawing.Point(36, 238);
             this.textBox_factorA.Name = "textBox_factorA";
             this.textBox_factorA.Size = new System.Drawing.Size(77, 22);
             this.textBox_factorA.TabIndex = 10;
@@ -149,7 +149,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(157, 239);
+            this.label6.Location = new System.Drawing.Point(122, 239);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(17, 17);
             this.label6.TabIndex = 11;
@@ -157,7 +157,7 @@
             // 
             // textBox_factorB
             // 
-            this.textBox_factorB.Location = new System.Drawing.Point(177, 239);
+            this.textBox_factorB.Location = new System.Drawing.Point(142, 237);
             this.textBox_factorB.Name = "textBox_factorB";
             this.textBox_factorB.Size = new System.Drawing.Size(77, 22);
             this.textBox_factorB.TabIndex = 12;
@@ -183,6 +183,7 @@
             this.label7.Size = new System.Drawing.Size(107, 17);
             this.label7.TabIndex = 14;
             this.label7.Text = "Filtered indexes";
+            this.label7.Visible = false;
             // 
             // textBox_FilteredIndexes
             // 
@@ -191,6 +192,7 @@
             this.textBox_FilteredIndexes.ReadOnly = true;
             this.textBox_FilteredIndexes.Size = new System.Drawing.Size(335, 22);
             this.textBox_FilteredIndexes.TabIndex = 15;
+            this.textBox_FilteredIndexes.Visible = false;
             // 
             // textBox_Avg
             // 
@@ -199,13 +201,14 @@
             this.textBox_Avg.ReadOnly = true;
             this.textBox_Avg.Size = new System.Drawing.Size(93, 22);
             this.textBox_Avg.TabIndex = 16;
+            this.textBox_Avg.Visible = false;
             // 
             // textBox_Y
             // 
             this.textBox_Y.Location = new System.Drawing.Point(118, 410);
             this.textBox_Y.Name = "textBox_Y";
             this.textBox_Y.ReadOnly = true;
-            this.textBox_Y.Size = new System.Drawing.Size(93, 22);
+            this.textBox_Y.Size = new System.Drawing.Size(149, 22);
             this.textBox_Y.TabIndex = 17;
             // 
             // label8
@@ -216,6 +219,7 @@
             this.label8.Size = new System.Drawing.Size(61, 17);
             this.label8.TabIndex = 18;
             this.label8.Text = "Average";
+            this.label8.Visible = false;
             // 
             // textBox_Electrodes
             // 
@@ -338,23 +342,23 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Factors for processing";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(255, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "C";
-            // 
             // textBox_C
             // 
-            this.textBox_C.Location = new System.Drawing.Point(278, 28);
+            this.textBox_C.Location = new System.Drawing.Point(243, 25);
             this.textBox_C.Name = "textBox_C";
             this.textBox_C.Size = new System.Drawing.Size(100, 22);
             this.textBox_C.TabIndex = 2;
             this.textBox_C.Text = "1";
             this.textBox_C.TextChanged += new System.EventHandler(this.textBox_C_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(224, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "C";
             // 
             // Form1
             // 

@@ -63,6 +63,8 @@ namespace RocsoleDataConverter
         public double FactorA { get => _factorA; set => _factorA = value; }
         /// <value>Sets the factor B of the transformation equation.</value>
         public double FactorB { get => _factorB; set => _factorB = value; }
+        /// <value>Sets the factor C of the transformation equation.</value>
+        public double FactorC { get => _factorC; set => _factorC = value; }
         /// <value>Sets the electrodes count of the sensor.</value>
         public int ElectrodesCount { get => _ElectrodesCount; set => _ElectrodesCount = value; }
         /// <value>The IP address of LabView module.</value>
@@ -70,7 +72,6 @@ namespace RocsoleDataConverter
         /// <value>The UDP port number the LabViewmodule is listening on.</value>
         public int UDPPort { get => _UDPPort; set { _UDPPort = value; _UDPSocketInitialized = false;  } }
 
-        public double FactorC { get => _factorC; set => _factorC = value; }
 
         public Converter() {
             lastRocsoleFrame = new RocsoleFrame();
@@ -315,6 +316,8 @@ namespace RocsoleDataConverter
             }
 
             double y = _factorC * _factorC * lastAverage + _factorA * lastAverage + _factorB;
+            if (y < 0)
+                y = 0;
             Console.WriteLine("Y = " + y.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
 
             SendValue(y, "0.##########");
