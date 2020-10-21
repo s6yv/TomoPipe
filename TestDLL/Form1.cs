@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using RocsoleDataConverter;
 
@@ -13,6 +14,9 @@ namespace TestDLL
     public partial class Form1 : Form
     {
         Converter obj;
+        int stopThread = 0;
+        int timeInteval = 350;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +26,21 @@ namespace TestDLL
             obj.ElectrodesCount = Int32.Parse(textBox_Electrodes.Text);
             obj.FactorA = 20.4;
             obj.FactorB = 16;
+
+            textBox_TimeStep.Text = "" + timeInteval;
+        }
+
+        public void mainThread()
+        {
+            while (stopThread == 0)
+            {
+                double y = obj.ProcessNextFrame();
+                textBox_Y.Invoke((MethodInvoker)delegate { textBox_Y.Text = "Y = " + y.ToString("0.#############"); });
+                //textBox_Y.Text = "Y = " + y.ToString("0.#############");
+                Thread.Sleep(timeInteval);
+            }
+            button1_START.Invoke((MethodInvoker)delegate { button1_START.Enabled = true; });
+            button4_STOP.Invoke((MethodInvoker)delegate { button4_STOP.Enabled = false; });
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -31,13 +50,22 @@ namespace TestDLL
             textBox_UDPIP.Enabled = false;
             textBox_UDPPort.Enabled = false;
             textBox_Electrodes.Enabled = false;
+            button1_START.Enabled = false;
+            button4_STOP.Enabled = true;
+            stopThread = 0;
+            ThreadStart childref = new ThreadStart(mainThread);
+            Thread mainTh = new Thread(childref);
+            mainTh.Start();
+        }
 
-            double y = obj.ProcessNextFrame();
-            textBox_Y.Text = "Y = " + y.ToString("0.#############");
+        private void button4_STOP_Click(object sender, EventArgs e)
+        {
+            stopThread = 1;
         }
 
         private void button_changeIP_Click(object sender, EventArgs e)
         {
+            stopThread = 1;
             textBox_IP.Enabled = true;
             textBox_port.Enabled = true;
             obj.CloseTomoKISStudioConnection();            
@@ -88,11 +116,13 @@ namespace TestDLL
 
         private void button2_Click(object sender, EventArgs e)
         {
+            stopThread = 1;
             textBox_Electrodes.Enabled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            stopThread = 1;
             textBox_UDPIP.Enabled = true;
             textBox_UDPPort.Enabled = true;
         }
@@ -143,6 +173,23 @@ namespace TestDLL
             catch (Exception ex)
             {
                 textBox_Error.Text = ex.Message;
+            }
+        }
+
+        private void textBox_TimeStep_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int tmp = int.Parse(textBox_TimeStep.Text);
+                if (tmp <= 0)
+                    throw new Exception("the time interval must be greater then 0ms");
+                timeInteval = tmp;
+                Console.WriteLine("New timeInterval = " + timeInteval + "ms");
+            }
+            catch (Exception ex)
+            {
+                textBox_Error.Text = ex.Message;
+                textBox_TimeStep.Text = "" + timeInteval;
             }
         }
     }
