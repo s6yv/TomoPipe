@@ -60,11 +60,35 @@ namespace RocsoleDataConverter
         /// <value>Gets the time stamp of the current measurement frame.</value>
         public string CurrentRocsoleFrameTimeStamp { get => currentRocsoleFrameTimeStamp; /*set => currentRocsoleFrameTimeStamp = value;*/ }
         /// <value>Sets the factor A of the transformation equation.</value>
-        public double FactorA { get => _factorA; set => _factorA = value; }
+        public double FactorA
+        {
+            get => _factorA;
+            set
+            {
+                _factorA = value;
+                Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+            }
+        }
         /// <value>Sets the factor B of the transformation equation.</value>
-        public double FactorB { get => _factorB; set => _factorB = value; }
+        public double FactorB
+        {
+            get => _factorB;
+            set
+            {
+                _factorB = value;
+                Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+            }
+        }
         /// <value>Sets the factor C of the transformation equation.</value>
-        public double FactorC { get => _factorC; set => _factorC = value; }
+        public double FactorC
+        {
+            get => _factorC;
+            set
+            {
+                _factorC = value;
+                Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+            }
+        }
         /// <value>Sets the electrodes count of the sensor.</value>
         public int ElectrodesCount { get => _ElectrodesCount; set => _ElectrodesCount = value; }
         /// <value>The IP address of LabView module.</value>
@@ -84,7 +108,7 @@ namespace RocsoleDataConverter
             _factorB = 16;
             _factorC = 1;
             AllocConsole();
-            Console.WriteLine("Converter initialized:\n Using equation: y = "+ _factorA.ToString("0.##") + "x+" + _factorB.ToString("0.##"));
+            Console.WriteLine("Converter initialized:\n Using equation: y = "+ _factorC.ToString("0.##")+"*"+ _factorC.ToString("0.##")+"*x+"+_factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
             //InitializeUDPSocket(_UDPIP, _UDPPort);
         }
 
