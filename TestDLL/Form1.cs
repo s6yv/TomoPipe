@@ -21,12 +21,19 @@ namespace TestDLL
         {
             InitializeComponent();
             obj = new Converter();
-            obj.TomoKISStudioIP = textBox_IP.Text;
-            obj.TomoKISStudioPort = Int32.Parse(textBox_port.Text);
-            obj.ElectrodesCount = Int32.Parse(textBox_Electrodes.Text);
-            obj.FactorA = 20.4;
-            obj.FactorB = 16;
 
+            textBox_IP.Text = obj.TomoKISStudioIP;
+            textBox_port.Text = ""+obj.TomoKISStudioPort;
+            textBox_UDPIP.Text = obj.UDPIP;
+            textBox_UDPPort.Text = ""+obj.UDPPort;
+            textBox_Electrodes.Text = ""+obj.ElectrodesCount;
+            textBox_factorA.Text = ""+obj.FactorA;
+            textBox_factorB.Text = ""+obj.FactorB;
+            textBox_C.Text = "" + obj.FactorC;
+            textBox_Electrodes.Text = "" + obj.ElectrodesCount;
+            checkBox1.Checked = obj.ConsiderNormalizedData;
+
+            timeInteval = obj.TimeInterval;
             textBox_TimeStep.Text = "" + timeInteval;
         }
 
@@ -61,6 +68,7 @@ namespace TestDLL
         private void button4_STOP_Click(object sender, EventArgs e)
         {
             stopThread = 1;
+            button4_STOP.Enabled = false;
         }
 
         private void button_changeIP_Click(object sender, EventArgs e)

@@ -27,20 +27,22 @@ namespace RocsoleDataConverter
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
-        private String _TomoKISStudioIP;
-        private int _TomoKISStudioPort;
+        private String _TomoKISStudioIP = "127.0.0.1";
+        private int _TomoKISStudioPort = 7777;
         private String _UDPIP = "127.0.0.1";
         private int _UDPPort = 777;
-        private int _ElectrodesCount;
+        private int _ElectrodesCount = 16;
         private bool _ConsiderNormalizedData = false;
         private RocsoleFrame lastRocsoleFrame;
         internal int _currentRocsoleFrameIndex;
         internal string currentRocsoleFrameTimeStamp;
         private double lastAverage;
+        private int timeInterval = 350;
         //private int lastRocsoleFrameIndex;
-        private double _factorA;
-        private double _factorB;
-        private double _factorC;
+        private double _factorA = 20.4;
+        private double _factorB = 16;
+        private double _factorC = 0;
+        bool initializing = true;
 
         static private Socket _UDPSocket = null;
         static private EndPoint _UDPEndPoint = null;
@@ -50,11 +52,11 @@ namespace RocsoleDataConverter
         static private Thread _receiver = null;
 
         /// <value>The IP address of TomoKISStudio module.</value>
-        public string TomoKISStudioIP { get => _TomoKISStudioIP; set => _TomoKISStudioIP = value; }
+        public string TomoKISStudioIP { get => _TomoKISStudioIP; set { _TomoKISStudioIP = value; Settings.Store(this); } }
         /// <value>The TCP port number the TomoKISStudio module is listening on.</value>
-        public int TomoKISStudioPort { get => _TomoKISStudioPort; set => _TomoKISStudioPort = value; }
+        public int TomoKISStudioPort { get => _TomoKISStudioPort; set { _TomoKISStudioPort = value; Settings.Store(this); } }
         /// <value>If true the normalized data are considered otherwise the RAW data retreived directly from Rocsole device.</value>
-        public bool ConsiderNormalizedData { get => _ConsiderNormalizedData; set => _ConsiderNormalizedData = value; }
+        public bool ConsiderNormalizedData { get => _ConsiderNormalizedData; set { _ConsiderNormalizedData = value; Settings.Store(this); } }
         /// <value>Gets the index of the current measurement frame.</value>
         public int CurrentRocsoleFrameIndex { get => _currentRocsoleFrameIndex; /*set => _currentRocsoleFrameIndex = value;*/ }
         /// <value>Gets the time stamp of the current measurement frame.</value>
@@ -66,7 +68,9 @@ namespace RocsoleDataConverter
             set
             {
                 _factorA = value;
-                Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+                Settings.Store(this);
+                if (!initializing)
+                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
             }
         }
         /// <value>Sets the factor B of the transformation equation.</value>
@@ -76,7 +80,9 @@ namespace RocsoleDataConverter
             set
             {
                 _factorB = value;
-                Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+                Settings.Store(this);
+                if (!initializing)
+                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
             }
         }
         /// <value>Sets the factor C of the transformation equation.</value>
@@ -86,30 +92,34 @@ namespace RocsoleDataConverter
             set
             {
                 _factorC = value;
-                Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+                Settings.Store(this);
+                if (!initializing)
+                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
             }
         }
         /// <value>Sets the electrodes count of the sensor.</value>
-        public int ElectrodesCount { get => _ElectrodesCount; set => _ElectrodesCount = value; }
+        public int ElectrodesCount { get => _ElectrodesCount; set { _ElectrodesCount = value; Settings.Store(this); } }
         /// <value>The IP address of LabView module.</value>
-        public string UDPIP { get => _UDPIP; set { _UDPIP = value; _UDPSocketInitialized = false; } }
+        public string UDPIP { get => _UDPIP; set { _UDPIP = value; _UDPSocketInitialized = false; Settings.Store(this); } }
         /// <value>The UDP port number the LabViewmodule is listening on.</value>
-        public int UDPPort { get => _UDPPort; set { _UDPPort = value; _UDPSocketInitialized = false;  } }
-
+        public int UDPPort { get => _UDPPort; set { _UDPPort = value; _UDPSocketInitialized = false; Settings.Store(this); } }
+        public int TimeInterval { get => timeInterval; set { timeInterval = value; Settings.Store(this); } }
 
         public Converter() {
+            AllocConsole();
+
             lastRocsoleFrame = new RocsoleFrame();
-            _ElectrodesCount = 16;
+
+            Settings.Read(this);
+
             _currentRocsoleFrameIndex = -1;
             currentRocsoleFrameTimeStamp = "";
             lastAverage = -1;
             //lastRocsoleFrameIndex = -1;
-            _factorA = 20.4;
-            _factorB = 16;
-            _factorC = 1;
-            AllocConsole();
-            Console.WriteLine("Converter initialized:\n Using equation: y = "+ _factorC.ToString("0.##")+"*"+ _factorC.ToString("0.##")+"*x+"+_factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+            //Console.WriteLine("Converter initialized:\n Using equation: y = "+ _factorC.ToString("0.##")+"*"+ _factorC.ToString("0.##")+"*x+"+_factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+            Console.WriteLine("Converter initialized.");
             //InitializeUDPSocket(_UDPIP, _UDPPort);
+            initializing = false;
         }
 
         /// <summary>
