@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RocsoleDataConverter</name>
+    </assembly>
+    <members>
+        <member name="T:RocsoleDataConverter.Converter">
+            <summary>
+            This class is the main of the DLL.
+            It consists of the methodes and fields used in LabView.
+            </summary>
+            <remarks>
+            How to use DLL in LabView see:
+            https://www.youtube.com/watch?v=hE0TVHqZjBI
+            ------------
+            To view this doc see https://github.com/EWSoftware/SHFB or https://www.helixoft.com/vsdocman/overview.html
+            </remarks>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.TomoKISStudioIP">
+            <value>The IP address of TomoKISStudio module.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.TomoKISStudioPort">
+            <value>The TCP port number the TomoKISStudio module is listening on.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.ConsiderNormalizedData">
+            <value>If true the normalized data are considered otherwise the RAW data retreived directly from Rocsole device.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.CurrentRocsoleFrameIndex">
+            <value>Gets the index of the current measurement frame.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.CurrentRocsoleFrameTimeStamp">
+            <value>Gets the time stamp of the current measurement frame.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.FactorA">
+            <value>Sets the factor A of the transformation equation.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.FactorB">
+            <value>Sets the factor B of the transformation equation.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.FactorC">
+            <value>Sets the factor C of the transformation equation.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.ElectrodesCount">
+            <value>Sets the electrodes count of the sensor.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.UDPIP">
+            <value>The IP address of LabView module.</value>
+        </member>
+        <member name="P:RocsoleDataConverter.Converter.UDPPort">
+            <value>The UDP port number the LabViewmodule is listening on.</value>
+        </member>
+        <member name="M:RocsoleDataConverter.Converter.Connect2TomoKISStudio(System.String,System.Int32)">
+            <summary>
+            Connects to the TomoKISStudio module on IP <paramref name="address"/> and port <paramref name="port"/>.
+            </summary>
+            <returns>
+            <b>True</b> if success.
+            See the console windows to check reasons
+            </returns>
+            <example>
+            <code>
+            Connect2TomoKISStudio("127.0.0.1", 7);
+            </code>
+            </example>
+            <param name="address">TomoKISStudio IP address.</param>
+            <param name="port">TCP port number the TomoKISStudio module is listening on.</param>
+        </member>
+        <member name="M:RocsoleDataConverter.Converter.CloseTomoKISStudioConnection">
+            <summary>
+            Disconnects from the TomoKISStudio module and closes the internal receiving thred/>.
+            </summary>
+            <returns>
+            <b>True</b> if success.
+            See the console windows to check reasons
+            </returns>
+        </member>
+        <member name="M:RocsoleDataConverter.Converter.ProcessNextFrame">
+            <summary>
+            Starts processing:
+            <list type="bullet">
+            <item>
+            <term>Connection</term>
+            <description>Connects the TomoKISStudio module if not connected yet. </description>
+            </item>
+            <item>
+            <term>New measurement frame</term>
+            <description>Retreives a new measurement frame. </description>
+            </item>
+            <item>
+            <term>Filtering</term>
+            <description>Filters the opposite electrodes. </description>
+            </item>
+            <item>
+            <term>Averaging</term>
+            <description>Calculate average of measurements values of the opposite electrodes to get a single current value (X). </description>
+            </item>
+            <item>
+            <term>Calculation</term>
+            <description>Makes calculation Y = factorA * X + factorB. </description>
+            </item>
+            <item>
+            <term>UDP sending</term>
+            <description>Sends the (Y) value on UDP to LabView module. </description>
+            </item>
+            </list>
+            </summary>
+            <returns>
+            <b>Y value</b>. 
+            If error returns -1.
+            <list type="bullet">
+            <item>
+            <term>Connection</term>
+            <description>Not connected to TomoKISStudio or connection fails. </description>
+            </item>
+            <item>
+            <term>Measurement data format</term>
+            <description>Wrong measurement data format. </description>
+            </item>
+            </list>
+            See the console windows to check reasons
+            </returns>
+        </member>
+        <member name="M:RocsoleDataConverter.Converter.SendValue(System.Double,System.String)">
+            <summary>
+            Sends calucated double-type <paramref name="value"/> to the LabView module with the <paramref name="precision"/>
+            Default precision is 0.##
+            </summary>
+            <returns>
+            <b>True</b> if success otherwise <b>false</b>.
+            See the console windows to check reasons
+            </returns>
+            <example>
+            <code>
+            SendValue(10.12345, "0.###") will send 10.123
+            SendValue(10.12345) will send 10.12
+            </code>
+            </example>
+        </member>
+    </members>
+</doc>
