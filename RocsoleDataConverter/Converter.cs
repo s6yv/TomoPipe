@@ -94,7 +94,7 @@ namespace RocsoleDataConverter
                 _factorC = value;
                 Settings.Store(this);
                 if (!initializing)
-                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*x^2+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
             }
         }
         /// <value>Sets the electrodes count of the sensor.</value>

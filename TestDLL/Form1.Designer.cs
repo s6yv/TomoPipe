@@ -58,9 +58,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button4_STOP = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.textBox_TimeStep = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox_TimeStep = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -136,15 +136,15 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 258);
+            this.label5.Location = new System.Drawing.Point(177, 26);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 17);
+            this.label5.Size = new System.Drawing.Size(33, 17);
             this.label5.TabIndex = 9;
-            this.label5.Text = "A";
+            this.label5.Text = "A(x)";
             // 
             // textBox_factorA
             // 
-            this.textBox_factorA.Location = new System.Drawing.Point(36, 257);
+            this.textBox_factorA.Location = new System.Drawing.Point(212, 23);
             this.textBox_factorA.Name = "textBox_factorA";
             this.textBox_factorA.Size = new System.Drawing.Size(77, 22);
             this.textBox_factorA.TabIndex = 10;
@@ -154,15 +154,15 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(122, 258);
+            this.label6.Location = new System.Drawing.Point(300, 26);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 17);
+            this.label6.Size = new System.Drawing.Size(34, 17);
             this.label6.TabIndex = 11;
-            this.label6.Text = "B";
+            this.label6.Text = "B(k)";
             // 
             // textBox_factorB
             // 
-            this.textBox_factorB.Location = new System.Drawing.Point(142, 256);
+            this.textBox_factorB.Location = new System.Drawing.Point(334, 23);
             this.textBox_factorB.Name = "textBox_factorB";
             this.textBox_factorB.Size = new System.Drawing.Size(77, 22);
             this.textBox_factorB.TabIndex = 12;
@@ -185,7 +185,7 @@
             this.textBox_Y.Location = new System.Drawing.Point(70, 415);
             this.textBox_Y.Name = "textBox_Y";
             this.textBox_Y.ReadOnly = true;
-            this.textBox_Y.Size = new System.Drawing.Size(149, 22);
+            this.textBox_Y.Size = new System.Drawing.Size(177, 22);
             this.textBox_Y.TabIndex = 17;
             // 
             // textBox_Electrodes
@@ -305,6 +305,10 @@
             // 
             this.groupBox4.Controls.Add(this.textBox_C);
             this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.textBox_factorB);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.textBox_factorA);
+            this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Location = new System.Drawing.Point(6, 231);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(447, 64);
@@ -314,7 +318,7 @@
             // 
             // textBox_C
             // 
-            this.textBox_C.Location = new System.Drawing.Point(243, 25);
+            this.textBox_C.Location = new System.Drawing.Point(71, 23);
             this.textBox_C.Name = "textBox_C";
             this.textBox_C.Size = new System.Drawing.Size(100, 22);
             this.textBox_C.TabIndex = 2;
@@ -324,11 +328,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(224, 27);
+            this.label1.Location = new System.Drawing.Point(13, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 17);
+            this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 1;
-            this.label1.Text = "C";
+            this.label1.Text = "C (x^2)";
             // 
             // button4_STOP
             // 
@@ -355,15 +359,14 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Processing";
             // 
-            // textBox_TimeStep
+            // label7
             // 
-            this.textBox_TimeStep.Location = new System.Drawing.Point(174, 24);
-            this.textBox_TimeStep.Name = "textBox_TimeStep";
-            this.textBox_TimeStep.Size = new System.Drawing.Size(68, 22);
-            this.textBox_TimeStep.TabIndex = 0;
-            this.textBox_TimeStep.Text = "300";
-            this.textBox_TimeStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_TimeStep.TextChanged += new System.EventHandler(this.textBox_TimeStep_TextChanged);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(249, 27);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(26, 17);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "ms";
             // 
             // label4
             // 
@@ -374,14 +377,15 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "Loop\'s step time interval";
             // 
-            // label7
+            // textBox_TimeStep
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(249, 27);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(26, 17);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "ms";
+            this.textBox_TimeStep.Location = new System.Drawing.Point(174, 24);
+            this.textBox_TimeStep.Name = "textBox_TimeStep";
+            this.textBox_TimeStep.Size = new System.Drawing.Size(68, 22);
+            this.textBox_TimeStep.TabIndex = 0;
+            this.textBox_TimeStep.Text = "300";
+            this.textBox_TimeStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_TimeStep.TextChanged += new System.EventHandler(this.textBox_TimeStep_TextChanged);
             // 
             // Form1
             // 
@@ -399,10 +403,6 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox_Electrodes);
             this.Controls.Add(this.textBox_Y);
-            this.Controls.Add(this.textBox_factorB);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox_factorA);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.button_changeIP);
             this.Controls.Add(this.textBox_port);
             this.Controls.Add(this.label3);
