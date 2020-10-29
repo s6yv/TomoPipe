@@ -21,6 +21,7 @@ namespace RocsoleDataConverter
 
         internal Data Filtered;
         internal double lastFilteredAverage;
+        internal double lastFilteredStdDev;
 
         private bool ParseFromJSON(string json)
         {
@@ -70,7 +71,10 @@ namespace RocsoleDataConverter
 
 
             if (Filtered.data.Count() > 0)
+            {
                 lastFilteredAverage = Filtered.data.Average();
+                lastFilteredStdDev = 0;
+            }
         }
         internal void FilterFrameNormalized(int elec)
         {

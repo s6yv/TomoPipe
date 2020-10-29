@@ -37,6 +37,7 @@ namespace RocsoleDataConverter
         internal int _currentRocsoleFrameIndex;
         internal string currentRocsoleFrameTimeStamp;
         private double lastAverage;
+        private double lastStdDev;
         private int timeInterval = 350;
         //private int lastRocsoleFrameIndex;
         private double _factorA = 20.4;
@@ -115,6 +116,7 @@ namespace RocsoleDataConverter
             _currentRocsoleFrameIndex = -1;
             currentRocsoleFrameTimeStamp = "";
             lastAverage = -1;
+            lastStdDev = 0;
             //lastRocsoleFrameIndex = -1;
             //Console.WriteLine("Converter initialized:\n Using equation: y = "+ _factorC.ToString("0.##")+"*"+ _factorC.ToString("0.##")+"*x+"+_factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
             Console.WriteLine("Converter initialized.");
@@ -253,9 +255,9 @@ namespace RocsoleDataConverter
                     //                    string newmsg = sr.Read()
                     lastRocsoleFrame.FilterFrame(msg4processing, _ConsiderNormalizedData, _ElectrodesCount);
                     if (_ConsiderNormalizedData)
-                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp+ "; Average normalized= " + lastRocsoleFrame.lastFilteredAverage);
+                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp + "; Average normalized= " + lastRocsoleFrame.lastFilteredAverage + "; StdDev normalized= " + lastRocsoleFrame.lastFilteredStdDev);
                     else
-                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp + "; Average RAW = " + lastRocsoleFrame.lastFilteredAverage);
+                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp + "; Average RAW = " + lastRocsoleFrame.lastFilteredAverage + "; StdDev normalized= " + lastRocsoleFrame.lastFilteredStdDev);
 
                     msg4processing = "";
 
@@ -346,8 +348,12 @@ namespace RocsoleDataConverter
             if (_currentRocsoleFrameIndex != lastRocsoleFrame.CurrentMeasurementNo)
             {
                 lastAverage = lastRocsoleFrame.lastFilteredAverage;
+                lastStdDev = lastRocsoleFrame.lastFilteredStdDev;
                 _currentRocsoleFrameIndex = lastRocsoleFrame.CurrentMeasurementNo;
             }
+
+            double x = lastAverage;
+            //double x = lastStdDev;
 
             double y = _factorC * _factorC * lastAverage + _factorA * lastAverage + _factorB;
             if (y < 0)
