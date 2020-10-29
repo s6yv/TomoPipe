@@ -41,9 +41,19 @@ namespace TestDLL
         {
             while (stopThread == 0)
             {
-                double y = obj.ProcessNextFrame();
-                textBox_Y.Invoke((MethodInvoker)delegate { textBox_Y.Text = "Y = " + y.ToString("0.#############"); });
-                //textBox_Y.Text = "Y = " + y.ToString("0.#############");
+                bool res = obj.ProcessNextFrame(out double avg, out double std, out double Y);
+                if (!res)
+                {
+                    textBox_Y.Invoke((MethodInvoker)delegate { textBox_Y.Text = "Error"; });
+                    textBox_AVG.Invoke((MethodInvoker)delegate { textBox_AVG.Text = "Error"; });
+                    textBox_STD.Invoke((MethodInvoker)delegate { textBox_STD.Text = "Error"; });
+                }
+                else
+                {
+                    textBox_Y.Invoke((MethodInvoker)delegate { textBox_Y.Text = Y.ToString("0.#############"); });
+                    textBox_AVG.Invoke((MethodInvoker)delegate { textBox_AVG.Text = avg.ToString("0.#############"); });
+                    textBox_STD.Invoke((MethodInvoker)delegate { textBox_STD.Text = std.ToString("0.#############"); });
+                }
                 Thread.Sleep(timeInteval);
             }
             button1_START.Invoke((MethodInvoker)delegate { button1_START.Enabled = true; });

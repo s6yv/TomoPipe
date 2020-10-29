@@ -335,15 +335,19 @@ namespace RocsoleDataConverter
         /// </list>
         /// See the console windows to check reasons
         /// </returns>
-        public double ProcessNextFrame()
+        public bool ProcessNextFrame(out double avg, out double std, out double Y)
         {
+            avg = 0;
+            std = 0;
+            Y = -1;
+
             if (!_TCPClientConnected)
             {
                 Connect2TomoKISStudio(_TomoKISStudioIP, _TomoKISStudioPort);
                 Thread.Sleep(1000);
             }
             if (!_TCPClientConnected)
-                return -1;
+                return false;
 
             if (_currentRocsoleFrameIndex != lastRocsoleFrame.CurrentMeasurementNo)
             {
@@ -353,21 +357,22 @@ namespace RocsoleDataConverter
             }
 
             double x = lastAverage;
-            //double x = lastStdDev;
+            avg = lastAverage;
+            std = lastStdDev;
 
-            double y = _factorC * (lastAverage * lastAverage) + _factorA * lastAverage + _factorB;
+            Y = _factorC * (x * x) + _factorA * x + _factorB;
 
-            if (y < 0)
-                y = 0;
-            Console.WriteLine("Y = " + y.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
+            if (Y < 0)
+                Y = 0;
+            Console.WriteLine("Y = " + Y.ToString("0.##########") + " and STD=" + std.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
 
-            SendValue(y, "0.##########");
+            SendValue(Y, std, "0.##########");
 
-            return y;
+            return true;
         }
 
         /// <summary>
-        /// Sends calucated double-type <paramref name="value"/> to the LabView module with the <paramref name="precision"/>
+        /// Sends calucated double-type <paramref name="value"/> and StdDev to the LabView module with the <paramref name="precision"/>
         /// Default precision is 0.##
         /// </summary>
         /// <returns>
@@ -376,11 +381,11 @@ namespace RocsoleDataConverter
         /// </returns>
         /// <example>
         /// <code>
-        /// SendValue(10.12345, "0.###") will send 10.123
-        /// SendValue(10.12345) will send 10.12
+        /// SendValue(10.12345, 1.234, "0.###") will send 10.123 1.234
+        /// SendValue(10.12345, 1.234) will send 10.12 1.234
         /// </code>
         /// </example>
-        public bool SendValue(double value, string precision = "0.##")
+        public bool SendValue(double value1, double value2, string precision = "0.##")
         {
             if (!_UDPSocketInitialized)
             {
@@ -391,7 +396,7 @@ namespace RocsoleDataConverter
             // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.sendto?view=netframework-4.8#System_Net_Sockets_Socket_SendTo_System_Byte___System_Net_EndPoint_
             try
             {
-                string message = value.ToString(precision);
+                string message = value1.ToString(precision) + " " + value2.ToString(precision);
                 // https://stackoverflow.com/questions/2637697/sending-udp-packet-in-c-sharp
                 _UDPSocket.SendTo(Encoding.ASCII.GetBytes(message), _UDPEndPoint);
                 Console.WriteLine($"Send to server ({message.Length}b): " + message);
