@@ -355,7 +355,8 @@ namespace RocsoleDataConverter
             double x = lastAverage;
             //double x = lastStdDev;
 
-            double y = _factorC * _factorC * lastAverage + _factorA * lastAverage + _factorB;
+            double y = _factorC * (lastAverage * lastAverage) + _factorA * lastAverage + _factorB;
+
             if (y < 0)
                 y = 0;
             Console.WriteLine("Y = " + y.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
