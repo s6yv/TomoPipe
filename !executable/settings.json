@@ -1,1 +1,1 @@
-{"TomoKISStudioIP":"127.0.0.1","TomoKISStudioPort":7777,"ConsiderNormalizedData":false,"CurrentRocsoleFrameIndex":-1,"CurrentRocsoleFrameTimeStamp":"","FactorA":15.0,"FactorB":14.0,"FactorC":2.0,"ElectrodesCount":16,"UDPIP":"127.0.0.1","UDPPort":777,"TimeInterval":350}
+{"TomoKISStudioIP":"127.0.0.1","TomoKISStudioPort":7777,"ConsiderNormalizedData":false,"CurrentRocsoleFrameIndex":-1,"CurrentRocsoleFrameTimeStamp":"","FactorA":45596.7287,"FactorB":52.8255,"FactorC":-90300798.0032,"ElectrodesCount":16,"UDPIP":"169.254.236.247","UDPPort":777,"TimeInterval":350}

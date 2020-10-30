@@ -70,7 +70,7 @@ namespace RocsoleDataConverter
                 _factorA = value;
                 Settings.Store(this);
                 if (!initializing)
-                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + "*x^2+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
             }
         }
         /// <value>Sets the factor B of the transformation equation.</value>
@@ -349,9 +349,17 @@ namespace RocsoleDataConverter
                 _currentRocsoleFrameIndex = lastRocsoleFrame.CurrentMeasurementNo;
             }
 
-            double y = _factorC * (lastAverage * lastAverage) + _factorA * lastAverage + _factorB;
+            //double y = _factorC * (lastAverage * lastAverage) + _factorA * lastAverage + _factorB;
+
+            double y = -195557215907.252 * (lastAverage * lastAverage * lastAverage) + 377633526.742025 * (lastAverage * lastAverage) - 289068.310728915 * lastAverage + 122.763475382379;
             if (y < 0)
+            {
                 y = 0;
+            }
+          // if (y < 5)
+            //{
+           //    y = 0;
+           //}
             Console.WriteLine("Y = " + y.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
 
             SendValue(y, "0.##########");

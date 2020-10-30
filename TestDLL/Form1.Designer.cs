@@ -154,15 +154,15 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(300, 26);
+            this.label6.Location = new System.Drawing.Point(299, 24);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(34, 17);
+            this.label6.Size = new System.Drawing.Size(42, 17);
             this.label6.TabIndex = 11;
-            this.label6.Text = "B(k)";
+            this.label6.Text = "B( k )";
             // 
             // textBox_factorB
             // 
-            this.textBox_factorB.Location = new System.Drawing.Point(334, 23);
+            this.textBox_factorB.Location = new System.Drawing.Point(341, 23);
             this.textBox_factorB.Name = "textBox_factorB";
             this.textBox_factorB.Size = new System.Drawing.Size(77, 22);
             this.textBox_factorB.TabIndex = 12;
