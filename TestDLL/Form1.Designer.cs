@@ -75,7 +75,7 @@
             this.button1_START.Location = new System.Drawing.Point(42, 56);
             this.button1_START.Name = "button1_START";
             this.button1_START.Size = new System.Drawing.Size(176, 32);
-            this.button1_START.TabIndex = 0;
+            this.button1_START.TabIndex = 13;
             this.button1_START.Text = "START";
             this.button1_START.UseVisualStyleBackColor = true;
             this.button1_START.Click += new System.EventHandler(this.button1_Click);
@@ -85,7 +85,7 @@
             this.textBox_IP.Location = new System.Drawing.Point(39, 39);
             this.textBox_IP.Name = "textBox_IP";
             this.textBox_IP.Size = new System.Drawing.Size(100, 22);
-            this.textBox_IP.TabIndex = 2;
+            this.textBox_IP.TabIndex = 0;
             this.textBox_IP.Text = "127.0.0.1";
             this.textBox_IP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_IP.TextChanged += new System.EventHandler(this.textBox_IP_TextChanged);
@@ -113,7 +113,7 @@
             this.textBox_port.Location = new System.Drawing.Point(198, 39);
             this.textBox_port.Name = "textBox_port";
             this.textBox_port.Size = new System.Drawing.Size(50, 22);
-            this.textBox_port.TabIndex = 6;
+            this.textBox_port.TabIndex = 1;
             this.textBox_port.Text = "7777";
             this.textBox_port.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_port.TextChanged += new System.EventHandler(this.textBox_port_TextChanged);
@@ -123,7 +123,7 @@
             this.button_changeIP.Location = new System.Drawing.Point(260, 39);
             this.button_changeIP.Name = "button_changeIP";
             this.button_changeIP.Size = new System.Drawing.Size(111, 28);
-            this.button_changeIP.TabIndex = 7;
+            this.button_changeIP.TabIndex = 2;
             this.button_changeIP.Text = "Change IP";
             this.button_changeIP.UseVisualStyleBackColor = true;
             this.button_changeIP.Click += new System.EventHandler(this.button_changeIP_Click);
@@ -139,17 +139,17 @@
             // 
             // textBox_factorA
             // 
-            this.textBox_factorA.Location = new System.Drawing.Point(212, 23);
+            this.textBox_factorA.Location = new System.Drawing.Point(45, 27);
             this.textBox_factorA.Name = "textBox_factorA";
             this.textBox_factorA.Size = new System.Drawing.Size(77, 22);
-            this.textBox_factorA.TabIndex = 10;
+            this.textBox_factorA.TabIndex = 9;
             this.textBox_factorA.Text = "20.4";
             this.textBox_factorA.TextChanged += new System.EventHandler(this.textBox_factorA_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(143, 259);
+            this.label6.Location = new System.Drawing.Point(147, 261);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 17);
             this.label6.TabIndex = 11;
@@ -157,10 +157,10 @@
             // 
             // textBox_factorB
             // 
-            this.textBox_factorB.Location = new System.Drawing.Point(163, 256);
+            this.textBox_factorB.Location = new System.Drawing.Point(184, 27);
             this.textBox_factorB.Name = "textBox_factorB";
             this.textBox_factorB.Size = new System.Drawing.Size(77, 22);
-            this.textBox_factorB.TabIndex = 12;
+            this.textBox_factorB.TabIndex = 10;
             this.textBox_factorB.Text = "16";
             this.textBox_factorB.TextChanged += new System.EventHandler(this.textBox_factorB_TextChanged);
             // 
@@ -170,7 +170,7 @@
             this.checkBox1.Location = new System.Drawing.Point(12, 55);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(251, 21);
-            this.checkBox1.TabIndex = 13;
+            this.checkBox1.TabIndex = 7;
             this.checkBox1.Text = "Process normalized measurements";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -181,14 +181,15 @@
             this.textBox_Y.Name = "textBox_Y";
             this.textBox_Y.ReadOnly = true;
             this.textBox_Y.Size = new System.Drawing.Size(116, 22);
-            this.textBox_Y.TabIndex = 17;
+            this.textBox_Y.TabIndex = 5;
+            this.textBox_Y.TabStop = false;
             // 
             // textBox_Electrodes
             // 
             this.textBox_Electrodes.Location = new System.Drawing.Point(20, 170);
             this.textBox_Electrodes.Name = "textBox_Electrodes";
             this.textBox_Electrodes.Size = new System.Drawing.Size(50, 22);
-            this.textBox_Electrodes.TabIndex = 20;
+            this.textBox_Electrodes.TabIndex = 6;
             this.textBox_Electrodes.Text = "16";
             this.textBox_Electrodes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_Electrodes.TextChanged += new System.EventHandler(this.textBox_Electrodes_TextChanged);
@@ -198,7 +199,7 @@
             this.button2.Location = new System.Drawing.Point(259, 165);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(111, 28);
-            this.button2.TabIndex = 21;
+            this.button2.TabIndex = 8;
             this.button2.Text = "Change electr.";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -218,14 +219,15 @@
             this.textBox_Error.Multiline = true;
             this.textBox_Error.Name = "textBox_Error";
             this.textBox_Error.Size = new System.Drawing.Size(438, 105);
-            this.textBox_Error.TabIndex = 23;
+            this.textBox_Error.TabIndex = 15;
+            this.textBox_Error.TabStop = false;
             // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(259, 104);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(111, 28);
-            this.button3.TabIndex = 29;
+            this.button3.TabIndex = 5;
             this.button3.Text = "Change IP";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -235,7 +237,7 @@
             this.textBox_UDPPort.Location = new System.Drawing.Point(197, 104);
             this.textBox_UDPPort.Name = "textBox_UDPPort";
             this.textBox_UDPPort.Size = new System.Drawing.Size(50, 22);
-            this.textBox_UDPPort.TabIndex = 28;
+            this.textBox_UDPPort.TabIndex = 4;
             this.textBox_UDPPort.Text = "777";
             this.textBox_UDPPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_UDPPort.TextChanged += new System.EventHandler(this.textBox_UDPPort_TextChanged);
@@ -263,7 +265,7 @@
             this.textBox_UDPIP.Location = new System.Drawing.Point(38, 104);
             this.textBox_UDPIP.Name = "textBox_UDPIP";
             this.textBox_UDPIP.Size = new System.Drawing.Size(100, 22);
-            this.textBox_UDPIP.TabIndex = 24;
+            this.textBox_UDPIP.TabIndex = 3;
             this.textBox_UDPIP.Text = "127.0.0.1";
             this.textBox_UDPIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_UDPIP.TextChanged += new System.EventHandler(this.textBox_UDPIP_TextChanged);
@@ -298,18 +300,16 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.textBox_C);
+            this.groupBox4.Controls.Add(this.textBox_factorA);
+            this.groupBox4.Controls.Add(this.textBox_factorB);
             this.groupBox4.Controls.Add(this.textBox_STD);
             this.groupBox4.Controls.Add(this.textBox_AVG);
             this.groupBox4.Controls.Add(this.textBox_Y);
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Controls.Add(this.textBox_C);
             this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Controls.Add(this.textBox_factorB);
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.textBox_factorA);
-            this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Location = new System.Drawing.Point(6, 231);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(447, 147);
@@ -319,19 +319,21 @@
             // 
             // textBox_STD
             // 
-            this.textBox_STD.Location = new System.Drawing.Point(322, 66);
+            this.textBox_STD.Location = new System.Drawing.Point(322, 68);
             this.textBox_STD.Name = "textBox_STD";
             this.textBox_STD.ReadOnly = true;
             this.textBox_STD.Size = new System.Drawing.Size(116, 22);
-            this.textBox_STD.TabIndex = 19;
+            this.textBox_STD.TabIndex = 4;
+            this.textBox_STD.TabStop = false;
             // 
             // textBox_AVG
             // 
-            this.textBox_AVG.Location = new System.Drawing.Point(76, 66);
+            this.textBox_AVG.Location = new System.Drawing.Point(76, 68);
             this.textBox_AVG.Name = "textBox_AVG";
             this.textBox_AVG.ReadOnly = true;
             this.textBox_AVG.Size = new System.Drawing.Size(116, 22);
-            this.textBox_AVG.TabIndex = 18;
+            this.textBox_AVG.TabIndex = 3;
+            this.textBox_AVG.TabStop = false;
             // 
             // label8
             // 
@@ -362,17 +364,17 @@
             // 
             // textBox_C
             // 
-            this.textBox_C.Location = new System.Drawing.Point(281, 25);
+            this.textBox_C.Location = new System.Drawing.Point(338, 27);
             this.textBox_C.Name = "textBox_C";
             this.textBox_C.Size = new System.Drawing.Size(100, 22);
-            this.textBox_C.TabIndex = 2;
+            this.textBox_C.TabIndex = 11;
             this.textBox_C.Text = "1";
             this.textBox_C.TextChanged += new System.EventHandler(this.textBox_C_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(262, 28);
+            this.label1.Location = new System.Drawing.Point(283, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 1;
@@ -384,7 +386,7 @@
             this.button4_STOP.Location = new System.Drawing.Point(234, 56);
             this.button4_STOP.Name = "button4_STOP";
             this.button4_STOP.Size = new System.Drawing.Size(176, 32);
-            this.button4_STOP.TabIndex = 3;
+            this.button4_STOP.TabIndex = 14;
             this.button4_STOP.Text = "STOP";
             this.button4_STOP.UseVisualStyleBackColor = true;
             this.button4_STOP.Click += new System.EventHandler(this.button4_STOP_Click);
@@ -426,7 +428,7 @@
             this.textBox_TimeStep.Location = new System.Drawing.Point(174, 24);
             this.textBox_TimeStep.Name = "textBox_TimeStep";
             this.textBox_TimeStep.Size = new System.Drawing.Size(68, 22);
-            this.textBox_TimeStep.TabIndex = 0;
+            this.textBox_TimeStep.TabIndex = 12;
             this.textBox_TimeStep.Text = "300";
             this.textBox_TimeStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_TimeStep.TextChanged += new System.EventHandler(this.textBox_TimeStep_TextChanged);
@@ -446,9 +448,7 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox_Electrodes);
-            this.Controls.Add(this.textBox_factorB);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox_factorA);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button_changeIP);
             this.Controls.Add(this.textBox_port);

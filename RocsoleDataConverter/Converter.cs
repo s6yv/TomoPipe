@@ -363,10 +363,10 @@ namespace RocsoleDataConverter
             //Y = _factorC * (x * x) + _factorA * x + _factorB;
 
             Y = -195557215907.252 * (x * x * x) + 377633526.742025 * (x * x) - 289068.310728915 * x + 122.763475382379;
-            if (y < 0)
-            //if (y < 5)
+            if (Y < 0)
+            //if (Y < 5)
             {
-                y = 0;
+                Y = 0;
             }
             Console.WriteLine("Y = " + Y.ToString("0.##########") + " and STD=" + std.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
 
