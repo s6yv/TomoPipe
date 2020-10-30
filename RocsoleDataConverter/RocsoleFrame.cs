@@ -19,8 +19,10 @@ namespace RocsoleDataConverter
         internal Data normalized;
         internal Data ROCSOLE_raw;
 
-        internal Data Filtered;
+        internal Data FilteredN;
+        internal Data FilteredR;
         internal double lastFilteredAverage;
+        internal double lastFilteredStdDev;
 
         private bool ParseFromJSON(string json)
         {
@@ -59,36 +61,42 @@ namespace RocsoleDataConverter
                 return;
             }
 
-            Filtered = new Data();
-            Filtered.data = new List<double>();
+            FilteredR = new Data();
+            FilteredR.data = new List<double>();
+            FilterFrameRAW(elec);
             if (considerNormalized)
+            {
+                FilteredN = new Data();
+                FilteredN.data = new List<double>();
                 FilterFrameNormalized(elec);
-            else
-                FilterFrameRAW(elec);
+            }
 
-
-
-
-            if (Filtered.data.Count() > 0)
-                lastFilteredAverage = Filtered.data.Average();
+            if (FilteredR.data.Count() > 0)
+            {
+                lastFilteredAverage = FilteredR.data.Average();
+                lastFilteredStdDev = StandardDeviation(Variance(FilteredR.data.ToArray(), lastFilteredAverage));
+                if (considerNormalized)
+                    lastFilteredAverage = FilteredN.data.Average();
+            }
         }
         internal void FilterFrameNormalized(int elec)
         {
             //Filtered.data = new List<double>(normalized.data);
             int meas = (int)(elec * (elec - 1) / 2);
-            if (normalized.size != meas) {
+            if (normalized.size != meas)
+            {
                 Console.WriteLine("Error while filtering opposite electrodes pairs");
                 Console.WriteLine("Input electrodes number " + elec + " not compatible with frame size " + normalized.size);
                 return;
             }
-            Filtered.data.Add(normalized.data.ElementAt((int)(elec / 2 - 1)));
+            FilteredN.data.Add(normalized.data.ElementAt((int)(elec / 2 - 1)));
             int lastValue = (int)(elec / 2 - 1);
             //string indexes = ""+lastValue+";";
-            for (int i = 2; i <= (int)(elec/2); i++)
+            for (int i = 2; i <= (int)(elec / 2); i++)
             {
                 int index = lastValue + elec - (i - 1);
                 lastValue = index;
-                Filtered.data.Add(normalized.data.ElementAt(index));
+                FilteredN.data.Add(normalized.data.ElementAt(index));
                 //indexes += " " + index + ";";
             }
             //Console.WriteLine(indexes);
@@ -103,17 +111,43 @@ namespace RocsoleDataConverter
                 Console.WriteLine("Input electrodes number " + elec + " not compatible with frame size " + ROCSOLE_raw.size);
                 return;
             }
-            Filtered.data.Add(ROCSOLE_raw.data.ElementAt((int)(elec / 2)));
+            FilteredR.data.Add(ROCSOLE_raw.data.ElementAt((int)(elec / 2)));
             int lastValue = (int)(elec / 2);
             //string indexes = ""+lastValue+";";
             for (int i = 2; i <= (int)(elec / 2); i++)
             {
                 int index = lastValue + elec + 1;
                 lastValue = index;
-                Filtered.data.Add(ROCSOLE_raw.data.ElementAt(index));
+                FilteredR.data.Add(ROCSOLE_raw.data.ElementAt(index));
                 //indexes += " " + index + ";";
             }
             //Console.WriteLine(indexes);
         }
+
+        private double Variance(double[] nums, double avg)
+        {
+            if (nums.Length > 1)
+            {
+                // Now figure out how far each point is from the mean
+                // So we subtract from the number the average
+                // Then raise it to the power of 2
+                double sumOfSquares = 0.0;
+                foreach (int num in nums)
+                {
+                    sumOfSquares += Math.Pow((num - avg), 2.0);
+                }
+                // Finally divide it by n - 1 (for standard deviation variance)
+                // Or use length without subtracting one ( for population standard deviation variance)
+                return sumOfSquares / (double)(nums.Length - 1);
+            }
+            else { return 0.0; }
+        }
+
+        // Square root the variance to get the standard deviation
+        private double StandardDeviation(double variance)
+        {
+            return Math.Sqrt(variance);
+        }
+
     }
 }

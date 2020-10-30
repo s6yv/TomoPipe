@@ -37,6 +37,7 @@ namespace RocsoleDataConverter
         internal int _currentRocsoleFrameIndex;
         internal string currentRocsoleFrameTimeStamp;
         private double lastAverage;
+        private double lastStdDev;
         private int timeInterval = 350;
         //private int lastRocsoleFrameIndex;
         private double _factorA = 20.4;
@@ -115,6 +116,7 @@ namespace RocsoleDataConverter
             _currentRocsoleFrameIndex = -1;
             currentRocsoleFrameTimeStamp = "";
             lastAverage = -1;
+            lastStdDev = 0;
             //lastRocsoleFrameIndex = -1;
             //Console.WriteLine("Converter initialized:\n Using equation: y = "+ _factorC.ToString("0.##")+"*"+ _factorC.ToString("0.##")+"*x+"+_factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
             Console.WriteLine("Converter initialized.");
@@ -253,9 +255,9 @@ namespace RocsoleDataConverter
                     //                    string newmsg = sr.Read()
                     lastRocsoleFrame.FilterFrame(msg4processing, _ConsiderNormalizedData, _ElectrodesCount);
                     if (_ConsiderNormalizedData)
-                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp+ "; Average normalized= " + lastRocsoleFrame.lastFilteredAverage);
+                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp + "; Average normalized= " + lastRocsoleFrame.lastFilteredAverage + "; StdDev normalized= " + lastRocsoleFrame.lastFilteredStdDev);
                     else
-                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp + "; Average RAW = " + lastRocsoleFrame.lastFilteredAverage);
+                        Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp + "; Average RAW = " + lastRocsoleFrame.lastFilteredAverage + "; StdDev normalized= " + lastRocsoleFrame.lastFilteredStdDev);
 
                     msg4processing = "";
 
@@ -333,42 +335,48 @@ namespace RocsoleDataConverter
         /// </list>
         /// See the console windows to check reasons
         /// </returns>
-        public double ProcessNextFrame()
+        public bool ProcessNextFrame(out double avg, out double std, out double Y)
         {
+            avg = 0;
+            std = 0;
+            Y = -1;
+
             if (!_TCPClientConnected)
             {
                 Connect2TomoKISStudio(_TomoKISStudioIP, _TomoKISStudioPort);
                 Thread.Sleep(1000);
             }
             if (!_TCPClientConnected)
-                return -1;
+                return false;
 
             if (_currentRocsoleFrameIndex != lastRocsoleFrame.CurrentMeasurementNo)
             {
                 lastAverage = lastRocsoleFrame.lastFilteredAverage;
+                lastStdDev = lastRocsoleFrame.lastFilteredStdDev;
                 _currentRocsoleFrameIndex = lastRocsoleFrame.CurrentMeasurementNo;
             }
 
-            //double y = _factorC * (lastAverage * lastAverage) + _factorA * lastAverage + _factorB;
+            double x = lastAverage;
+            avg = lastAverage;
+            std = lastStdDev;
 
-            double y = -195557215907.252 * (lastAverage * lastAverage * lastAverage) + 377633526.742025 * (lastAverage * lastAverage) - 289068.310728915 * lastAverage + 122.763475382379;
+            //Y = _factorC * (x * x) + _factorA * x + _factorB;
+
+            Y = -195557215907.252 * (x * x * x) + 377633526.742025 * (x * x) - 289068.310728915 * x + 122.763475382379;
             if (y < 0)
+            //if (y < 5)
             {
                 y = 0;
             }
-          // if (y < 5)
-            //{
-           //    y = 0;
-           //}
-            Console.WriteLine("Y = " + y.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
+            Console.WriteLine("Y = " + Y.ToString("0.##########") + " and STD=" + std.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
 
-            SendValue(y, "0.##########");
+            SendValue(Y, std, "0.##########");
 
-            return y;
+            return true;
         }
 
         /// <summary>
-        /// Sends calucated double-type <paramref name="value"/> to the LabView module with the <paramref name="precision"/>
+        /// Sends calucated double-type <paramref name="value"/> and StdDev to the LabView module with the <paramref name="precision"/>
         /// Default precision is 0.##
         /// </summary>
         /// <returns>
@@ -377,11 +385,11 @@ namespace RocsoleDataConverter
         /// </returns>
         /// <example>
         /// <code>
-        /// SendValue(10.12345, "0.###") will send 10.123
-        /// SendValue(10.12345) will send 10.12
+        /// SendValue(10.12345, 1.234, "0.###") will send 10.123 1.234
+        /// SendValue(10.12345, 1.234) will send 10.12 1.234
         /// </code>
         /// </example>
-        public bool SendValue(double value, string precision = "0.##")
+        public bool SendValue(double value1, double value2, string precision = "0.##")
         {
             if (!_UDPSocketInitialized)
             {
@@ -392,7 +400,7 @@ namespace RocsoleDataConverter
             // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.sendto?view=netframework-4.8#System_Net_Sockets_Socket_SendTo_System_Byte___System_Net_EndPoint_
             try
             {
-                string message = value.ToString(precision);
+                string message = value1.ToString(precision) + " " + value2.ToString(precision);
                 // https://stackoverflow.com/questions/2637697/sending-udp-packet-in-c-sharp
                 _UDPSocket.SendTo(Encoding.ASCII.GetBytes(message), _UDPEndPoint);
                 Console.WriteLine($"Send to server ({message.Length}b): " + message);
