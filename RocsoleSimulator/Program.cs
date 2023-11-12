@@ -34,7 +34,7 @@ namespace RocsoleSimulator
             List<double> column0 = new List<double>();
             
 
-            using (Stream stream = File.Open(@"C:\Users\potat\OneDrive\Documents\work\PDP\rocsoledataconverter\!executable\out.txt", FileMode.Open))
+            using (Stream stream = File.Open(@"./out.txt", FileMode.Open))
                 //256 1800
             using (TextReader sr = new StreamReader(stream, Encoding.UTF8))
             {
