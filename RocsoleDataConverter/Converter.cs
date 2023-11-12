@@ -259,7 +259,7 @@ namespace RocsoleDataConverter
                         msg4future = newmsg.Substring(indexOfChar + 1);
                     //else
                     //    msg4future = "";
-                                                                                            //Console.WriteLine("msg4future:" + msg4future);
+                    //Console.WriteLine("msg4future:" + msg4future);
 
 
 

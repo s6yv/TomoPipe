@@ -10,7 +10,7 @@ namespace RocsoleDataConverter
     class Data
     {
         internal int size;
-        internal List<double> data;
+        internal List<double> data = new List<double>();
     }
     class RocsoleFrame
     {
@@ -52,36 +52,30 @@ namespace RocsoleDataConverter
             return false;
         }
 
+        private void PrintGasCorePosition(){
+            var normalizedFrame = new ComputedNormalizedFrame(ROCSOLE_raw.data);
+            Console.WriteLine($"Distance from centre: {normalizedFrame.DistanceOfGasCoreFromCentre()}");
+            Console.WriteLine($"Offset angle: {normalizedFrame.GasCoreOffsetAngleDeg()}");
+        }
+
         //filter out only the opposite electrodes measurements from field lastRocsoleFrame.Filtered
         //and store them to lastFilteredFrame
         internal void FilterFrame(string json, bool considerNormalized, int elec)
         {
-            if (!ParseFromJSON(json))
-            {
-                return;
-            }
-
-            FilteredR = new Data();
-            FilteredR.data = new List<double>();
+            if (!ParseFromJSON(json)) return;
             FilterFrameRAW(elec);
-            if (considerNormalized)
-            {
-                FilteredN = new Data();
-                FilteredN.data = new List<double>();
-                FilterFrameNormalized(elec);
-            }
 
-            if (FilteredR.data.Count() > 0)
-            {
-                lastFilteredAverage = FilteredR.data.Average();
-                lastFilteredStdDev = StandardDeviation(Variance(FilteredR.data.ToArray(), lastFilteredAverage));
-                if (considerNormalized)
-                    lastFilteredAverage = FilteredN.data.Average();
-            }
+            if (considerNormalized) FilterFrameNormalized(elec);
+            if (FilteredR.data.Count() == 0) return;
+
+            PrintGasCorePosition();
+            lastFilteredAverage = FilteredR.data.Average();
+            lastFilteredStdDev = StandardDeviation(Variance(FilteredR.data.ToArray(), lastFilteredAverage));
+            if (considerNormalized) lastFilteredAverage = FilteredN.data.Average();
         }
         internal void FilterFrameNormalized(int elec)
         {
-            //Filtered.data = new List<double>(normalized.data);
+            FilteredN = new Data();
             int meas = (int)(elec * (elec - 1) / 2);
             if (normalized.size != meas)
             {
@@ -103,6 +97,8 @@ namespace RocsoleDataConverter
         }
         internal void FilterFrameRAW(int elec)
         {
+
+            FilteredR = new Data();
             //Filtered.data = new List<double>(ROCSOLE_raw.data);
             int meas = elec * elec;
             if (ROCSOLE_raw.size != meas)
