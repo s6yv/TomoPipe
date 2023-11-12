@@ -30,6 +30,7 @@ namespace TestDLL
             textBox_factorA.Text = ""+obj.FactorA;
             textBox_factorB.Text = ""+obj.FactorB;
             textBox_C.Text = "" + obj.FactorC;
+            textBox1.Text = "" + obj.Avgf;
             textBox_Electrodes.Text = "" + obj.ElectrodesCount;
             checkBox1.Checked = obj.ConsiderNormalizedData;
 
@@ -208,6 +209,19 @@ namespace TestDLL
             {
                 textBox_Error.Text = ex.Message;
                 textBox_TimeStep.Text = "" + timeInteval;
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            textBox_Error.Text = "";
+            try
+            {
+                obj.Avgf = Double.Parse(textBox1.Text);
+            }
+            catch (Exception ex)
+            {
+                textBox_Error.Text = ex.Message;
             }
         }
     }

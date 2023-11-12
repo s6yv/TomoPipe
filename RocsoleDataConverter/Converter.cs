@@ -32,7 +32,7 @@ namespace RocsoleDataConverter
         private String _UDPIP = "127.0.0.1";
         private int _UDPPort = 777;
         private int _ElectrodesCount = 16;
-        private bool _ConsiderNormalizedData = false;
+        private bool _ConsiderNormalizedData = true;
         private RocsoleFrame lastRocsoleFrame;
         internal int _currentRocsoleFrameIndex;
         internal string currentRocsoleFrameTimeStamp;
@@ -43,6 +43,7 @@ namespace RocsoleDataConverter
         private double _factorA = 20.4;
         private double _factorB = 16;
         private double _factorC = 0;
+        private double _avgf = 1;
         bool initializing = true;
 
         static private Socket _UDPSocket = null;
@@ -71,7 +72,7 @@ namespace RocsoleDataConverter
                 _factorA = value;
                 Settings.Store(this);
                 if (!initializing)
-                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + "*x^2+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + "*x^2+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##") + " and Avg Current " + _avgf.ToString("0.##"));
             }
         }
         /// <value>Sets the factor B of the transformation equation.</value>
@@ -83,7 +84,7 @@ namespace RocsoleDataConverter
                 _factorB = value;
                 Settings.Store(this);
                 if (!initializing)
-                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*" + _factorC.ToString("0.##") + "*x+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##") + "and Avg Current " + _avgf.ToString("0.##"));
             }
         }
         /// <value>Sets the factor C of the transformation equation.</value>
@@ -95,7 +96,18 @@ namespace RocsoleDataConverter
                 _factorC = value;
                 Settings.Store(this);
                 if (!initializing)
-                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*x^2+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
+                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*x^2+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##") + "*Avg Current " + _avgf.ToString("0.##") + "and Avg Current " + _avgf.ToString("0.##"));
+            }
+        }
+        public double Avgf
+        {
+            get => _avgf;
+            set
+            {
+                _avgf = value;
+                Settings.Store(this);
+                if (!initializing)
+                    Console.WriteLine("Using equation: y = " + _factorC.ToString("0.##") + "*x^2+" + _factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##") + "and Avg Current " + _avgf.ToString("0.##"));
             }
         }
         /// <value>Sets the electrodes count of the sensor.</value>
@@ -357,17 +369,31 @@ namespace RocsoleDataConverter
             }
 
             double x = lastAverage;
+           // lastAverage = Math.Round(lastAverage, 5);
+           // lastAverage = Math.Round(lastAverage, 5);
             avg = lastAverage;
             std = lastStdDev;
+            //std.Normalize();
 
-            //Y = _factorC * (x * x) + _factorA * x + _factorB;
+            lastAverage = (lastAverage /0.00255);
 
-            Y = -195557215907.252 * (x * x * x) + 377633526.742025 * (x * x) - 289068.310728915 * x + 122.763475382379;
-            if (Y < 0)
-            //if (Y < 5)
-            {
-                Y = 0;
-            }
+            Y = -78.587 * (lastAverage * lastAverage) + 135.3 * lastAverage + 4.33;
+
+           // Y = -173933811479.26 * (x * x * x) + 313138821.74 * (x * x) - 233463.16 * x + 109.58;
+           // Y = -171299570766.255 * (x * x * x) + 308678865.185535 * (x * x) - -240571.136698138 * x + 114.227030065516;
+           // Y= Math.Round(Y, 2);
+           // std = Math.Round(std, 6);
+           // if (Y < 0 )
+
+           // {
+            //    Y = 0;
+          //  }
+
+            //if (Y > 81)
+
+           // {
+             //   Y = 81.4;
+          //  }
             Console.WriteLine("Y = " + Y.ToString("0.##########") + " and STD=" + std.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
 
             SendValue(Y, std, "0.##########");

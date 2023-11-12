@@ -53,18 +53,20 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox_C = new System.Windows.Forms.TextBox();
             this.textBox_STD = new System.Windows.Forms.TextBox();
             this.textBox_AVG = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox_C = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button4_STOP = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox_TimeStep = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -177,7 +179,7 @@
             // 
             // textBox_Y
             // 
-            this.textBox_Y.Location = new System.Drawing.Point(217, 104);
+            this.textBox_Y.Location = new System.Drawing.Point(217, 129);
             this.textBox_Y.Name = "textBox_Y";
             this.textBox_Y.ReadOnly = true;
             this.textBox_Y.Size = new System.Drawing.Size(116, 22);
@@ -207,7 +209,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(9, 493);
+            this.label10.Location = new System.Drawing.Point(9, 515);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(70, 17);
             this.label10.TabIndex = 22;
@@ -215,7 +217,7 @@
             // 
             // textBox_Error
             // 
-            this.textBox_Error.Location = new System.Drawing.Point(12, 514);
+            this.textBox_Error.Location = new System.Drawing.Point(12, 536);
             this.textBox_Error.Multiline = true;
             this.textBox_Error.Name = "textBox_Error";
             this.textBox_Error.Size = new System.Drawing.Size(438, 105);
@@ -300,6 +302,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.label14);
             this.groupBox4.Controls.Add(this.textBox_C);
             this.groupBox4.Controls.Add(this.textBox_factorA);
             this.groupBox4.Controls.Add(this.textBox_factorB);
@@ -312,55 +316,10 @@
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Location = new System.Drawing.Point(6, 231);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(447, 147);
+            this.groupBox4.Size = new System.Drawing.Size(447, 171);
             this.groupBox4.TabIndex = 33;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Factors for processing";
-            // 
-            // textBox_STD
-            // 
-            this.textBox_STD.Location = new System.Drawing.Point(322, 68);
-            this.textBox_STD.Name = "textBox_STD";
-            this.textBox_STD.ReadOnly = true;
-            this.textBox_STD.Size = new System.Drawing.Size(116, 22);
-            this.textBox_STD.TabIndex = 4;
-            this.textBox_STD.TabStop = false;
-            // 
-            // textBox_AVG
-            // 
-            this.textBox_AVG.Location = new System.Drawing.Point(76, 68);
-            this.textBox_AVG.Name = "textBox_AVG";
-            this.textBox_AVG.ReadOnly = true;
-            this.textBox_AVG.Size = new System.Drawing.Size(116, 22);
-            this.textBox_AVG.TabIndex = 3;
-            this.textBox_AVG.TabStop = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(222, 69);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(104, 17);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "STD of RAW = ";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(10, 107);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(203, 17);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Y =   C * X^2   +   A * X   +   B =";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 69);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(62, 17);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "X = AVG";
             // 
             // textBox_C
             // 
@@ -370,6 +329,51 @@
             this.textBox_C.TabIndex = 11;
             this.textBox_C.Text = "1";
             this.textBox_C.TextChanged += new System.EventHandler(this.textBox_C_TextChanged);
+            // 
+            // textBox_STD
+            // 
+            this.textBox_STD.Location = new System.Drawing.Point(322, 93);
+            this.textBox_STD.Name = "textBox_STD";
+            this.textBox_STD.ReadOnly = true;
+            this.textBox_STD.Size = new System.Drawing.Size(116, 22);
+            this.textBox_STD.TabIndex = 4;
+            this.textBox_STD.TabStop = false;
+            // 
+            // textBox_AVG
+            // 
+            this.textBox_AVG.Location = new System.Drawing.Point(76, 93);
+            this.textBox_AVG.Name = "textBox_AVG";
+            this.textBox_AVG.ReadOnly = true;
+            this.textBox_AVG.Size = new System.Drawing.Size(116, 22);
+            this.textBox_AVG.TabIndex = 3;
+            this.textBox_AVG.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(222, 94);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(104, 17);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "STD of RAW = ";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(10, 132);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(203, 17);
+            this.label13.TabIndex = 6;
+            this.label13.Text = "Y =   C * X^2   +   A * X   +   B =";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 94);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(62, 17);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "X = AVG";
             // 
             // label1
             // 
@@ -398,7 +402,7 @@
             this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.textBox_TimeStep);
             this.groupBox5.Controls.Add(this.button1_START);
-            this.groupBox5.Location = new System.Drawing.Point(6, 384);
+            this.groupBox5.Location = new System.Drawing.Point(6, 408);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(449, 100);
             this.groupBox5.TabIndex = 34;
@@ -433,11 +437,28 @@
             this.textBox_TimeStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_TimeStep.TextChanged += new System.EventHandler(this.textBox_TimeStep_TextChanged);
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(9, 68);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(62, 17);
+            this.label14.TabIndex = 21;
+            this.label14.Text = "Full_Avg";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(78, 65);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 22);
+            this.textBox1.TabIndex = 22;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 631);
+            this.ClientSize = new System.Drawing.Size(460, 662);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox_UDPPort);
@@ -511,6 +532,8 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox_STD;
         private System.Windows.Forms.TextBox textBox_AVG;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label14;
     }
 }
 
