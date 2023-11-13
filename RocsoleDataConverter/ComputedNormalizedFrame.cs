@@ -36,7 +36,6 @@ namespace RocsoleDataConverter
         // not sure about the units or values. made it up :c
         readonly double maxCurrentBetweenOppositeElectrodes = 10;
         readonly double maxCurrentBetweenAdjecentQuadrants = 25;
-        readonly double pipeRadius = 0.96;
         double[] allRawCurrents;
         RelevantCurrents currents;
 
@@ -96,7 +95,7 @@ namespace RocsoleDataConverter
             var currentStandardDeviation = StandardDeviation(currentsAcross);
 
             var ratio = currentStandardDeviation / averageCurrent;
-            return 6.333 * Math.Log(ratio) + 17.744 * Math.Pow(pipeRadius, 2);
+            return 6.333 * Math.Log(ratio) + 17.744;
         }
 
         private IOrderedEnumerable<DataPoint> LargestValues(double[] values){
