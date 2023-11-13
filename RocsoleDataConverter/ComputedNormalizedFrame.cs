@@ -34,8 +34,8 @@ namespace RocsoleDataConverter
     internal class ComputedNormalizedFrame
     {
         // not sure about the units or values. made it up :c
-        readonly double maxCurrentBetweenOppositeElectrodes = 10;
-        readonly double maxCurrentBetweenAdjecentQuadrants = 25;
+        readonly double maxCurrentBetweenOppositeElectrodes = 0.00099050174375;
+        readonly double maxCurrentBetweenAdjecentQuadrants = 0.0014231092291666658;
         double[] allRawCurrents;
         RelevantCurrents currents;
 
