@@ -58,7 +58,7 @@ namespace TestDLL
                     textBox_Y.Invoke((MethodInvoker)delegate { textBox_Y.Text = Y.ToString("0.#############"); });
                     textBox_AVG.Invoke((MethodInvoker)delegate { textBox_AVG.Text = avg.ToString("0.#############"); });
                     textBox_STD.Invoke((MethodInvoker)delegate { textBox_STD.Text = std.ToString("0.#############"); });
-                    gasCoreView.Invoke((MethodInvoker)delegate { gasCoreView.drawAll(Y * 10, gasCoreDistance, gasCoreAngle); });
+                    gasCoreView.Invoke((MethodInvoker)delegate { gasCoreView.drawAll(Y, gasCoreDistance, gasCoreAngle); });
                 }
                 Thread.Sleep(timeInteval);
             }

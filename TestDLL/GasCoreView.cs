@@ -15,7 +15,7 @@ namespace TestDLL
     {
 
         private const int PIPE_DIAMETER = 120; //mm
-        private const int PIPE_PIXEL_DIAMETER = 600; //px
+        private const int PIPE_PIXEL_DIAMETER = 900; //px
         private const int PIPE_CENTER = 5+ PIPE_PIXEL_DIAMETER / 2; //px
 
         private Graphics g;
