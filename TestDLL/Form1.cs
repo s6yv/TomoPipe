@@ -16,6 +16,7 @@ namespace TestDLL
         Converter obj;
         int stopThread = 0;
         int timeInteval = 350;
+        GasCoreView gasCoreView = new GasCoreView();
 
         public Form1()
         {
@@ -36,13 +37,16 @@ namespace TestDLL
 
             timeInteval = obj.TimeInterval;
             textBox_TimeStep.Text = "" + timeInteval;
+
+            // gas core view
+            gasCoreView.Show();
         }
 
         public void mainThread()
         {
             while (stopThread == 0)
             {
-                bool res = obj.ProcessNextFrame(out double avg, out double std, out double Y);
+                bool res = obj.ProcessNextFrame(out double avg, out double std, out double Y, out double gasCoreDistance, out double gasCoreAngle);
                 if (!res)
                 {
                     textBox_Y.Invoke((MethodInvoker)delegate { textBox_Y.Text = "Error"; });
@@ -54,6 +58,7 @@ namespace TestDLL
                     textBox_Y.Invoke((MethodInvoker)delegate { textBox_Y.Text = Y.ToString("0.#############"); });
                     textBox_AVG.Invoke((MethodInvoker)delegate { textBox_AVG.Text = avg.ToString("0.#############"); });
                     textBox_STD.Invoke((MethodInvoker)delegate { textBox_STD.Text = std.ToString("0.#############"); });
+                    gasCoreView.Invoke((MethodInvoker)delegate { gasCoreView.drawAll(Y * 10, gasCoreDistance, gasCoreAngle); });
                 }
                 Thread.Sleep(timeInteval);
             }

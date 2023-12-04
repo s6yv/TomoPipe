@@ -347,10 +347,12 @@ namespace RocsoleDataConverter
         /// </list>
         /// See the console windows to check reasons
         /// </returns>
-        public bool ProcessNextFrame(out double avg, out double std, out double Y)
+        public bool ProcessNextFrame(out double avg, out double std, out double Y, out double coreDistanceFromCenter, out double coreAngle)
         {
             avg = 0;
             std = 0;
+            coreDistanceFromCenter = 0;
+            coreAngle = 0;
             Y = -1;
 
             if (!_TCPClientConnected)
@@ -366,6 +368,8 @@ namespace RocsoleDataConverter
                 lastAverage = lastRocsoleFrame.lastFilteredAverage;
                 lastStdDev = lastRocsoleFrame.lastFilteredStdDev;
                 _currentRocsoleFrameIndex = lastRocsoleFrame.CurrentMeasurementNo;
+                coreDistanceFromCenter = lastRocsoleFrame.gasCoreDistanceFromCenter;
+                coreAngle = lastRocsoleFrame.gasCoreOffsetAngleDeg;
             }
 
             double x = lastAverage;

@@ -24,6 +24,9 @@ namespace RocsoleDataConverter
         internal double lastFilteredAverage;
         internal double lastFilteredStdDev;
 
+        internal double gasCoreDistanceFromCenter;
+        internal double gasCoreOffsetAngleDeg;
+
         private bool ParseFromJSON(string json)
         {
             try
@@ -52,10 +55,12 @@ namespace RocsoleDataConverter
             return false;
         }
 
-        private void PrintGasCorePosition(){
+        private void GasCorePosition(){
             var normalizedFrame = new ComputedNormalizedFrame(ROCSOLE_raw.data);
-            Console.WriteLine($"Distance from centre: {normalizedFrame.DistanceOfGasCoreFromCentre()}");
-            Console.WriteLine($"Offset angle: {normalizedFrame.GasCoreOffsetAngleDeg()}");
+            gasCoreDistanceFromCenter = normalizedFrame.DistanceOfGasCoreFromCentre();
+            gasCoreOffsetAngleDeg = normalizedFrame.GasCoreOffsetAngleDeg();
+            Console.WriteLine($"Distance from centre: {gasCoreDistanceFromCenter}");
+            Console.WriteLine($"Offset angle: {gasCoreOffsetAngleDeg}");
         }
 
         //filter out only the opposite electrodes measurements from field lastRocsoleFrame.Filtered
@@ -68,7 +73,8 @@ namespace RocsoleDataConverter
             if (considerNormalized) FilterFrameNormalized(elec);
             if (FilteredR.data.Count() == 0) return;
 
-            PrintGasCorePosition();
+            GasCorePosition();
+            
             lastFilteredAverage = FilteredR.data.Average();
             lastFilteredStdDev = StandardDeviation(Variance(FilteredR.data.ToArray(), lastFilteredAverage));
             if (considerNormalized) lastFilteredAverage = FilteredN.data.Average();
