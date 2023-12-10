@@ -30,6 +30,20 @@ namespace RocsoleDataConverter
         }
     }
 
+    readonly struct GasCore
+    {
+        public readonly double diameter;
+        public readonly int offsetAngle;
+        public readonly double offsetDistance;
+
+        public GasCore(double diameter, int offsetAngle, double offsetDistance)
+        {
+            this.diameter = diameter;
+            this.offsetAngle = offsetAngle;
+            this.offsetDistance = offsetDistance;
+        }
+    }
+
 
     internal class ComputedNormalizedFrame
     {

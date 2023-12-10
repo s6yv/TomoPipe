@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
+
 
 namespace RocsoleDataConverter
 {
@@ -29,6 +27,7 @@ namespace RocsoleDataConverter
 
         public static bool Read(Converter obj)
         {
+            // FIXME: Naming (removed UDP, added AR port)
             try
             {
                 JObject root = JObject.Parse(File.ReadAllText(jsonFileName));
@@ -39,8 +38,6 @@ namespace RocsoleDataConverter
                 obj.FactorB = (double)root["FactorB"];
                 obj.FactorC = (double)root["FactorC"];
                 obj.ElectrodesCount = (int)root["ElectrodesCount"];
-                obj.UDPIP = (string)root["UDPIP"];
-                obj.UDPPort = (int)root["UDPPort"];
                 obj.TimeInterval = (int)root["TimeInterval"];
                 Console.WriteLine("Settings read successfully from the settings.JSON file");
                 return true;

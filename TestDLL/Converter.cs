@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using TestDLL;
 
 namespace RocsoleDataConverter
 {
@@ -24,10 +25,9 @@ namespace RocsoleDataConverter
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
+        internal ArAppConnection arAppConnection = new ArAppConnection();
         private string _TomoKISStudioIP = "127.0.0.1";
         private int _TomoKISStudioPort = 7777;
-        private string _UDPIP = "127.0.0.1";
-        private int _UDPPort = 777;
         private int _ElectrodesCount = 16;
         private bool _ConsiderNormalizedData = true;
         private RocsoleFrame lastRocsoleFrame;
@@ -44,7 +44,7 @@ namespace RocsoleDataConverter
 
         static private Socket _UDPSocket = null;
         static private EndPoint _UDPEndPoint = null;
-        static private bool _UDPSocketInitialized = false;
+        static private bool _arAppSocketCreated = false;
         static private Socket _TCPClient = null;
         static private bool _TCPClientConnected = false;
         static private Thread _receiver = null;
@@ -109,9 +109,6 @@ namespace RocsoleDataConverter
         /// <value>Sets the electrodes count of the sensor.</value>
         public int ElectrodesCount { get => _ElectrodesCount; set { _ElectrodesCount = value; Settings.Store(this); } }
         /// <value>The IP address of LabView module.</value>
-        public string UDPIP { get => _UDPIP; set { _UDPIP = value; _UDPSocketInitialized = false; Settings.Store(this); } }
-        /// <value>The UDP port number the LabViewmodule is listening on.</value>
-        public int UDPPort { get => _UDPPort; set { _UDPPort = value; _UDPSocketInitialized = false; Settings.Store(this); } }
         public int TimeInterval { get => timeInterval; set { timeInterval = value; Settings.Store(this); } }
 
         public Converter() {
