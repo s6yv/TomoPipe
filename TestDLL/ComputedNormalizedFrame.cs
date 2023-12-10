@@ -20,8 +20,8 @@ namespace RocsoleDataConverter
 
     readonly struct DataPoint
     {
-        public readonly int id; // electrodes 1 and 9, 2 and 10 ...
-        public readonly double value; // electrodes 1 and 5, 5 and 9 ...
+        public readonly int id;
+        public readonly double value;
 
         public DataPoint(int id, double value)
         {
@@ -33,7 +33,6 @@ namespace RocsoleDataConverter
 
     internal class ComputedNormalizedFrame
     {
-        // not sure about the units or values. made it up :c
         readonly double maxCurrentBetweenOppositeElectrodes = 0.00099050174375;
         readonly double maxCurrentBetweenAdjecentQuadrants = 0.0014231092291666658;
         double[] allRawCurrents;
@@ -87,6 +86,16 @@ namespace RocsoleDataConverter
 
             var relevantCurrents = new RelevantCurrents(currentInOppositeElectrodes, currentInAdjecentElectrodes);
             return relevantCurrents;
+        }
+
+        public double GasCoreDiameter() {
+            // computes a quadratic equation from the PhD
+            // D(i) = -78.587i^2 + 135.3i + 4.24634
+            var currentsAcross = currents.inOppositeElectrodes;
+            var averageCurrent = currentsAcross.Average();
+            double diameter = -78.586 * Math.Pow(averageCurrent, 2);
+            diameter += 135.3 * averageCurrent + 4.24634;
+            return diameter;
         }
 
         public double DistanceOfGasCoreFromCentre() {

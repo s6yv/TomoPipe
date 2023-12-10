@@ -5,6 +5,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.IO;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace RocsoleSimulator
 {
@@ -24,24 +27,18 @@ namespace RocsoleSimulator
         static private int _activeClients = 0;
         static private double[] decimalArray;
 
-        static void Main(string[] args)
+        static void Main()
         {
-           
-            List<double> column0 = new List<double>();
-            
-
-            using (Stream stream = File.Open(@"./rawData.txt", FileMode.Open))
-                //256 1800
+            using (Stream stream = File.Open(@"./rawData.txt", FileMode.Open)) //256 1800
             using (TextReader sr = new StreamReader(stream, Encoding.UTF8))
             {
-                
 
+
+                List<double> column0 = new List<double>();
                 string line;
-                
-
                 while ((line = sr.ReadLine()) != null)
                 {
-                    
+
                     string[] arr = line.Trim().Split('\t');
                     foreach (var item in arr)
                     {
@@ -55,7 +52,7 @@ namespace RocsoleSimulator
             }
 
             Console.WriteLine("Thread server started, listening on port 7777");
-            
+
             GetEndPoint();
             CreateTcpListener();
             RunLisinerThread();
@@ -266,7 +263,6 @@ namespace RocsoleSimulator
                 if (i<(k+255)) { holder += ","; }
             }
             holder += "]}};";
-            
             return holder;
         }
         static private void ClientCommunication(Socket client, String address, String port)
@@ -275,7 +271,7 @@ namespace RocsoleSimulator
             StreamWriter sw = new StreamWriter(ns);
             int index = 1;
             int cycle = 0;
-            
+
             try
             {
                 while (true)
@@ -297,15 +293,6 @@ namespace RocsoleSimulator
             catch (Exception)
             {
                 Console.WriteLine($"Client disconnected");
-            }
-        }
-
-        static private void GetNewPort()
-        {
-            if (!int.TryParse(Console.ReadLine(), out _port))
-            {
-                Console.WriteLine("Wrong port - there are characters or it is not an integer.");
-                Environment.Exit(1);
             }
         }
     }

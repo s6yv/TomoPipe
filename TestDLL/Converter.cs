@@ -24,9 +24,9 @@ namespace RocsoleDataConverter
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
-        private String _TomoKISStudioIP = "127.0.0.1";
+        private string _TomoKISStudioIP = "127.0.0.1";
         private int _TomoKISStudioPort = 7777;
-        private String _UDPIP = "127.0.0.1";
+        private string _UDPIP = "127.0.0.1";
         private int _UDPPort = 777;
         private int _ElectrodesCount = 16;
         private bool _ConsiderNormalizedData = true;
@@ -36,7 +36,6 @@ namespace RocsoleDataConverter
         private double lastAverage;
         private double lastStdDev;
         private int timeInterval = 350;
-        //private int lastRocsoleFrameIndex;
         private double _factorA = 20.4;
         private double _factorB = 16;
         private double _factorC = 0;
@@ -126,10 +125,6 @@ namespace RocsoleDataConverter
             currentRocsoleFrameTimeStamp = "";
             lastAverage = -1;
             lastStdDev = 0;
-            //lastRocsoleFrameIndex = -1;
-            //Console.WriteLine("Converter initialized:\n Using equation: y = "+ _factorC.ToString("0.##")+"*"+ _factorC.ToString("0.##")+"*x+"+_factorA.ToString("0.##") + "*x+" + _factorB.ToString("0.##"));
-            Console.WriteLine("Converter initialized.");
-            //InitializeUDPSocket(_UDPIP, _UDPPort);
             initializing = false;
         }
 
@@ -376,102 +371,11 @@ namespace RocsoleDataConverter
 
             Y = -78.587 * (lastAverage * lastAverage) + 135.3 * lastAverage + 4.33;
 
-           // Y = -173933811479.26 * (x * x * x) + 313138821.74 * (x * x) - 233463.16 * x + 109.58;
-           // Y = -171299570766.255 * (x * x * x) + 308678865.185535 * (x * x) - -240571.136698138 * x + 114.227030065516;
-           // Y= Math.Round(Y, 2);
-           // std = Math.Round(std, 6);
-           // if (Y < 0 )
 
-           // {
-            //    Y = 0;
-          //  }
-
-            //if (Y > 81)
-
-           // {
-             //   Y = 81.4;
-          //  }
             Console.WriteLine("Y = " + Y.ToString("0.##########") + " and STD=" + std.ToString("0.##########") + " for frame index = " + _currentRocsoleFrameIndex);
 
-            SendValue(Y, std, "0.##########");
 
             return true;
-        }
-
-        /// <summary>
-        /// Sends calucated double-type <paramref name="value"/> and StdDev to the LabView module with the <paramref name="precision"/>
-        /// Default precision is 0.##
-        /// </summary>
-        /// <returns>
-        /// <b>True</b> if success otherwise <b>false</b>.
-        /// See the console windows to check reasons
-        /// </returns>
-        /// <example>
-        /// <code>
-        /// SendValue(10.12345, 1.234, "0.###") will send 10.123 1.234
-        /// SendValue(10.12345, 1.234) will send 10.12 1.234
-        /// </code>
-        /// </example>
-        public bool SendValue(double value1, double value2, string precision = "0.##")
-        {
-            if (!_UDPSocketInitialized)
-            {
-                //Console.WriteLine("First set the UDPIP and UDPPort properties to initialize.");
-                //return false;
-                InitializeUDPSocket(_UDPIP, _UDPPort);
-            }
-            // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.sendto?view=netframework-4.8#System_Net_Sockets_Socket_SendTo_System_Byte___System_Net_EndPoint_
-            try
-            {
-                string message = value1.ToString(precision) + " " + value2.ToString(precision);
-                // https://stackoverflow.com/questions/2637697/sending-udp-packet-in-c-sharp
-                _UDPSocket.SendTo(Encoding.ASCII.GetBytes(message), _UDPEndPoint);
-                Console.WriteLine($"Send to server ({message.Length}b): " + message);
-                return true;
-            }
-            catch (ArgumentNullException)
-            {
-                Console.WriteLine("Buffer is null or remoteEP is null.");
-            }
-            catch (SocketException)
-            {
-                Console.WriteLine("An error occurred when attempting to access the socket.");
-            }
-            catch (ObjectDisposedException)
-            {
-                Console.WriteLine("The Socket has been closed.");
-            }
-            return false;
-        }
-
-        private void InitializeUDPSocket(string address, int port)
-        {
-            // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.-ctor?view=netframework-4.8#System_Net_Sockets_Socket__ctor_System_Net_Sockets_AddressFamily_System_Net_Sockets_SocketType_System_Net_Sockets_ProtocolType
-            // https://docs.microsoft.com/en-us/dotnet/api/system.net.ipendpoint.-ctor?view=netframework-4.8#System_Net_IPEndPoint__ctor_System_Net_IPAddress_System_Int32_
-            try
-            {
-                if (_UDPSocketInitialized)
-                    _UDPSocket.Close();
-                _UDPSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                _UDPEndPoint = new IPEndPoint(IPAddress.Parse(address), port);
-                _UDPSocketInitialized = true;
-                Console.WriteLine("UDP socket initialized on "+address+":"+port);
-            }
-            catch (ArgumentNullException)
-            {
-                Console.WriteLine("Address is null.");
-                Environment.Exit(1);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                Console.WriteLine("Port is less than minPort or is greater than maxPort address is less than 0 or greater than 0x00000000FFFFFFFF.");
-                Environment.Exit(1);
-            }
-            catch (SocketException)
-            {
-                Console.WriteLine("The combination of addressFamily, socketType, and protocolType results in an invalid socket.");
-                Environment.Exit(1);
-            }
         }
     }
 }

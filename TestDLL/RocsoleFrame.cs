@@ -56,6 +56,7 @@ namespace RocsoleDataConverter
             var normalizedFrame = new ComputedNormalizedFrame(ROCSOLE_raw.data);
             Console.WriteLine($"Distance from centre: {normalizedFrame.DistanceOfGasCoreFromCentre()}");
             Console.WriteLine($"Offset angle: {normalizedFrame.GasCoreOffsetAngleDeg()}");
+            Console.WriteLine($"Diameter: {normalizedFrame.GasCoreDiameter()}");
         }
 
         //filter out only the opposite electrodes measurements from field lastRocsoleFrame.Filtered
