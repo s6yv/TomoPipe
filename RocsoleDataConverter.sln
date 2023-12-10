@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
@@ -8,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDLL", "TestDLL\TestDLL.
 		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38} = {D7BC15EE-5532-4CFE-9B55-0925E85C4B38}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocsoleSimulator", "RocsoleSimulator\RocsoleSimulator.csproj", "{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocsoleSimulator", "RocsoleSimulator\RocsoleSimulator.csproj", "{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,8 +27,8 @@ Global
 		{F51CF9BB-027D-4799-A7C7-EB73F601AA22}.Release|x64.Build.0 = Release|x64
 		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Debug|x64.ActiveCfg = Debug|x64
-		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Debug|x64.Build.0 = Debug|x64
+		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Debug|x64.Build.0 = Debug|Any CPU
 		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38}.Release|x64.ActiveCfg = Release|x64
