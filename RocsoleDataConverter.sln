@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDLL", "TestDLL\TestDLL.csproj", "{F51CF9BB-027D-4799-A7C7-EB73F601AA22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestDLL", "TestDLL\TestDLL.csproj", "{F51CF9BB-027D-4799-A7C7-EB73F601AA22}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D7BC15EE-5532-4CFE-9B55-0925E85C4B38} = {D7BC15EE-5532-4CFE-9B55-0925E85C4B38}
 	EndProjectSection
