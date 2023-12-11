@@ -28,518 +28,535 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1_START = new System.Windows.Forms.Button();
-            this.textBox_IP = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox_port = new System.Windows.Forms.TextBox();
-            this.button_changeIP = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox_factorA = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox_factorB = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox_Y = new System.Windows.Forms.TextBox();
-            this.textBox_Electrodes = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.arAppSocketStatus = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox_C = new System.Windows.Forms.TextBox();
-            this.textBox_STD = new System.Windows.Forms.TextBox();
-            this.textBox_AVG = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button4_STOP = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox_TimeStep = new System.Windows.Forms.TextBox();
-            this.arServerIp = new System.Windows.Forms.Label();
-            this.errorBox = new System.Windows.Forms.GroupBox();
-            this.textBox_Error = new System.Windows.Forms.Label();
-            this.arServerPort = new System.Windows.Forms.Label();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.errorBox.SuspendLayout();
-            this.SuspendLayout();
+            button1_START = new System.Windows.Forms.Button();
+            textBox_IP = new System.Windows.Forms.TextBox();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            textBox_port = new System.Windows.Forms.TextBox();
+            button_changeIP = new System.Windows.Forms.Button();
+            label5 = new System.Windows.Forms.Label();
+            textBox_factorA = new System.Windows.Forms.TextBox();
+            label6 = new System.Windows.Forms.Label();
+            textBox_factorB = new System.Windows.Forms.TextBox();
+            checkBox1 = new System.Windows.Forms.CheckBox();
+            textBox_Y = new System.Windows.Forms.TextBox();
+            textBox_Electrodes = new System.Windows.Forms.TextBox();
+            button2 = new System.Windows.Forms.Button();
+            label11 = new System.Windows.Forms.Label();
+            label12 = new System.Windows.Forms.Label();
+            groupBox1 = new System.Windows.Forms.GroupBox();
+            groupBox2 = new System.Windows.Forms.GroupBox();
+            startArBroadcast = new System.Windows.Forms.Button();
+            arDeviceIp = new System.Windows.Forms.TextBox();
+            arBroadcastPort = new System.Windows.Forms.Label();
+            arBroadcastStatus = new System.Windows.Forms.Label();
+            label10 = new System.Windows.Forms.Label();
+            groupBox3 = new System.Windows.Forms.GroupBox();
+            groupBox4 = new System.Windows.Forms.GroupBox();
+            textBox1 = new System.Windows.Forms.TextBox();
+            label14 = new System.Windows.Forms.Label();
+            textBox_C = new System.Windows.Forms.TextBox();
+            textBox_STD = new System.Windows.Forms.TextBox();
+            textBox_AVG = new System.Windows.Forms.TextBox();
+            label8 = new System.Windows.Forms.Label();
+            label13 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            button4_STOP = new System.Windows.Forms.Button();
+            groupBox5 = new System.Windows.Forms.GroupBox();
+            label7 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            textBox_TimeStep = new System.Windows.Forms.TextBox();
+            errorBox = new System.Windows.Forms.GroupBox();
+            textBox_Error = new System.Windows.Forms.Label();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
+            groupBox5.SuspendLayout();
+            errorBox.SuspendLayout();
+            SuspendLayout();
             // 
             // button1_START
             // 
-            this.button1_START.Location = new System.Drawing.Point(32, 46);
-            this.button1_START.Margin = new System.Windows.Forms.Padding(2);
-            this.button1_START.Name = "button1_START";
-            this.button1_START.Size = new System.Drawing.Size(132, 26);
-            this.button1_START.TabIndex = 13;
-            this.button1_START.Text = "START";
-            this.button1_START.UseVisualStyleBackColor = true;
-            this.button1_START.Click += new System.EventHandler(this.button1_Click);
+            button1_START.Location = new System.Drawing.Point(37, 53);
+            button1_START.Margin = new System.Windows.Forms.Padding(2);
+            button1_START.Name = "button1_START";
+            button1_START.Size = new System.Drawing.Size(154, 30);
+            button1_START.TabIndex = 13;
+            button1_START.Text = "START";
+            button1_START.UseVisualStyleBackColor = true;
+            button1_START.Click += button1_Click;
             // 
             // textBox_IP
             // 
-            this.textBox_IP.Location = new System.Drawing.Point(29, 32);
-            this.textBox_IP.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_IP.Name = "textBox_IP";
-            this.textBox_IP.Size = new System.Drawing.Size(76, 20);
-            this.textBox_IP.TabIndex = 0;
-            this.textBox_IP.Text = "127.0.0.1";
-            this.textBox_IP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox_IP.TextChanged += new System.EventHandler(this.textBox_IP_TextChanged);
+            textBox_IP.Location = new System.Drawing.Point(34, 37);
+            textBox_IP.Margin = new System.Windows.Forms.Padding(2);
+            textBox_IP.Name = "textBox_IP";
+            textBox_IP.Size = new System.Drawing.Size(88, 23);
+            textBox_IP.TabIndex = 0;
+            textBox_IP.Text = "127.0.0.1";
+            textBox_IP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBox_IP.TextChanged += textBox_IP_TextChanged;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 32);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(17, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "IP";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(14, 37);
+            label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(17, 15);
+            label2.TabIndex = 4;
+            label2.Text = "IP";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(119, 32);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "port";
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(139, 37);
+            label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(29, 15);
+            label3.TabIndex = 5;
+            label3.Text = "port";
             // 
             // textBox_port
             // 
-            this.textBox_port.Location = new System.Drawing.Point(148, 32);
-            this.textBox_port.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_port.Name = "textBox_port";
-            this.textBox_port.Size = new System.Drawing.Size(38, 20);
-            this.textBox_port.TabIndex = 1;
-            this.textBox_port.Text = "7777";
-            this.textBox_port.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox_port.TextChanged += new System.EventHandler(this.textBox_port_TextChanged);
+            textBox_port.Location = new System.Drawing.Point(173, 37);
+            textBox_port.Margin = new System.Windows.Forms.Padding(2);
+            textBox_port.Name = "textBox_port";
+            textBox_port.Size = new System.Drawing.Size(44, 23);
+            textBox_port.TabIndex = 1;
+            textBox_port.Text = "7777";
+            textBox_port.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBox_port.TextChanged += textBox_port_TextChanged;
             // 
             // button_changeIP
             // 
-            this.button_changeIP.Location = new System.Drawing.Point(195, 32);
-            this.button_changeIP.Margin = new System.Windows.Forms.Padding(2);
-            this.button_changeIP.Name = "button_changeIP";
-            this.button_changeIP.Size = new System.Drawing.Size(83, 23);
-            this.button_changeIP.TabIndex = 2;
-            this.button_changeIP.Text = "Change IP";
-            this.button_changeIP.UseVisualStyleBackColor = true;
-            this.button_changeIP.Click += new System.EventHandler(this.button_changeIP_Click);
+            button_changeIP.Location = new System.Drawing.Point(227, 37);
+            button_changeIP.Margin = new System.Windows.Forms.Padding(2);
+            button_changeIP.Name = "button_changeIP";
+            button_changeIP.Size = new System.Drawing.Size(97, 27);
+            button_changeIP.TabIndex = 2;
+            button_changeIP.Text = "Change IP";
+            button_changeIP.UseVisualStyleBackColor = true;
+            button_changeIP.Click += button_changeIP_Click;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 238);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(25, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "A(x)";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(13, 275);
+            label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(29, 15);
+            label5.TabIndex = 9;
+            label5.Text = "A(x)";
             // 
             // textBox_factorA
             // 
-            this.textBox_factorA.Location = new System.Drawing.Point(34, 22);
-            this.textBox_factorA.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_factorA.Name = "textBox_factorA";
-            this.textBox_factorA.Size = new System.Drawing.Size(59, 20);
-            this.textBox_factorA.TabIndex = 9;
-            this.textBox_factorA.Text = "20.4";
-            this.textBox_factorA.TextChanged += new System.EventHandler(this.textBox_factorA_TextChanged);
+            textBox_factorA.Location = new System.Drawing.Point(40, 25);
+            textBox_factorA.Margin = new System.Windows.Forms.Padding(2);
+            textBox_factorA.Name = "textBox_factorA";
+            textBox_factorA.Size = new System.Drawing.Size(68, 23);
+            textBox_factorA.TabIndex = 9;
+            textBox_factorA.Text = "20.4";
+            textBox_factorA.TextChanged += textBox_factorA_TextChanged;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(110, 235);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(32, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "B( k )";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(128, 271);
+            label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(34, 15);
+            label6.TabIndex = 11;
+            label6.Text = "B( k )";
             // 
             // textBox_factorB
             // 
-            this.textBox_factorB.Location = new System.Drawing.Point(138, 22);
-            this.textBox_factorB.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_factorB.Name = "textBox_factorB";
-            this.textBox_factorB.Size = new System.Drawing.Size(59, 20);
-            this.textBox_factorB.TabIndex = 10;
-            this.textBox_factorB.Text = "16";
-            this.textBox_factorB.TextChanged += new System.EventHandler(this.textBox_factorB_TextChanged);
+            textBox_factorB.Location = new System.Drawing.Point(161, 25);
+            textBox_factorB.Margin = new System.Windows.Forms.Padding(2);
+            textBox_factorB.Name = "textBox_factorB";
+            textBox_factorB.Size = new System.Drawing.Size(68, 23);
+            textBox_factorB.TabIndex = 10;
+            textBox_factorB.Text = "16";
+            textBox_factorB.TextChanged += textBox_factorB_TextChanged;
             // 
             // checkBox1
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(9, 45);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(188, 17);
-            this.checkBox1.TabIndex = 7;
-            this.checkBox1.Text = "Process normalized measurements";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new System.Drawing.Point(10, 52);
+            checkBox1.Margin = new System.Windows.Forms.Padding(2);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new System.Drawing.Size(209, 19);
+            checkBox1.TabIndex = 7;
+            checkBox1.Text = "Process normalized measurements";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // textBox_Y
             // 
-            this.textBox_Y.Location = new System.Drawing.Point(163, 105);
-            this.textBox_Y.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_Y.Name = "textBox_Y";
-            this.textBox_Y.ReadOnly = true;
-            this.textBox_Y.Size = new System.Drawing.Size(88, 20);
-            this.textBox_Y.TabIndex = 5;
-            this.textBox_Y.TabStop = false;
+            textBox_Y.Location = new System.Drawing.Point(190, 121);
+            textBox_Y.Margin = new System.Windows.Forms.Padding(2);
+            textBox_Y.Name = "textBox_Y";
+            textBox_Y.ReadOnly = true;
+            textBox_Y.Size = new System.Drawing.Size(102, 23);
+            textBox_Y.TabIndex = 5;
+            textBox_Y.TabStop = false;
             // 
             // textBox_Electrodes
             // 
-            this.textBox_Electrodes.Location = new System.Drawing.Point(15, 161);
-            this.textBox_Electrodes.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_Electrodes.Name = "textBox_Electrodes";
-            this.textBox_Electrodes.Size = new System.Drawing.Size(38, 20);
-            this.textBox_Electrodes.TabIndex = 6;
-            this.textBox_Electrodes.Text = "16";
-            this.textBox_Electrodes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_Electrodes.TextChanged += new System.EventHandler(this.textBox_Electrodes_TextChanged);
+            textBox_Electrodes.Location = new System.Drawing.Point(18, 186);
+            textBox_Electrodes.Margin = new System.Windows.Forms.Padding(2);
+            textBox_Electrodes.Name = "textBox_Electrodes";
+            textBox_Electrodes.Size = new System.Drawing.Size(44, 23);
+            textBox_Electrodes.TabIndex = 6;
+            textBox_Electrodes.Text = "16";
+            textBox_Electrodes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            textBox_Electrodes.TextChanged += textBox_Electrodes_TextChanged;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(194, 157);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(83, 24);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Change electr.";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Location = new System.Drawing.Point(226, 181);
+            button2.Margin = new System.Windows.Forms.Padding(2);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(97, 28);
+            button2.TabIndex = 8;
+            button2.Text = "Change electr.";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(115, 23);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(25, 13);
-            this.label11.TabIndex = 27;
-            this.label11.Text = "port";
+            label11.AutoSize = true;
+            label11.Location = new System.Drawing.Point(134, 26);
+            label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label11.Name = "label11";
+            label11.Size = new System.Drawing.Size(29, 15);
+            label11.TabIndex = 27;
+            label11.Text = "port";
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(11, 84);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(17, 13);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "IP";
+            label12.AutoSize = true;
+            label12.Location = new System.Drawing.Point(13, 97);
+            label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(17, 15);
+            label12.TabIndex = 26;
+            label12.Text = "IP";
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(4, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(337, 50);
-            this.groupBox1.TabIndex = 30;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "TomoKISStudio connection";
+            groupBox1.Location = new System.Drawing.Point(5, 12);
+            groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            groupBox1.Size = new System.Drawing.Size(393, 58);
+            groupBox1.TabIndex = 30;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "TomoKISStudio connection";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.arServerPort);
-            this.groupBox2.Controls.Add(this.arServerIp);
-            this.groupBox2.Controls.Add(this.arAppSocketStatus);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Location = new System.Drawing.Point(4, 61);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(337, 75);
-            this.groupBox2.TabIndex = 31;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "AR app connection";
+            groupBox2.Controls.Add(startArBroadcast);
+            groupBox2.Controls.Add(arDeviceIp);
+            groupBox2.Controls.Add(arBroadcastPort);
+            groupBox2.Controls.Add(arBroadcastStatus);
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(label11);
+            groupBox2.Location = new System.Drawing.Point(5, 70);
+            groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new System.Windows.Forms.Padding(2);
+            groupBox2.Size = new System.Drawing.Size(393, 87);
+            groupBox2.TabIndex = 31;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "AR app connection";
             // 
-            // arAppSocketStatus
+            // startArBroadcast
             // 
-            this.arAppSocketStatus.AutoSize = true;
-            this.arAppSocketStatus.Location = new System.Drawing.Point(49, 45);
-            this.arAppSocketStatus.Name = "arAppSocketStatus";
-            this.arAppSocketStatus.Size = new System.Drawing.Size(148, 13);
-            this.arAppSocketStatus.TabIndex = 38;
-            this.arAppSocketStatus.Text = "waiting for AR app to connect";
+            startArBroadcast.Location = new System.Drawing.Point(222, 23);
+            startArBroadcast.Name = "startArBroadcast";
+            startArBroadcast.Size = new System.Drawing.Size(96, 26);
+            startArBroadcast.TabIndex = 41;
+            startArBroadcast.Text = "Broadcast";
+            startArBroadcast.UseVisualStyleBackColor = true;
+            startArBroadcast.Click += onStartArBroadcast;
+            // 
+            // arDeviceIp
+            // 
+            arDeviceIp.Location = new System.Drawing.Point(29, 23);
+            arDeviceIp.Name = "arDeviceIp";
+            arDeviceIp.Size = new System.Drawing.Size(100, 23);
+            arDeviceIp.TabIndex = 40;
+            // 
+            // arBroadcastPort
+            // 
+            arBroadcastPort.AutoSize = true;
+            arBroadcastPort.Location = new System.Drawing.Point(168, 27);
+            arBroadcastPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            arBroadcastPort.Name = "arBroadcastPort";
+            arBroadcastPort.Size = new System.Drawing.Size(31, 15);
+            arBroadcastPort.TabIndex = 39;
+            arBroadcastPort.Text = "8080";
+            // 
+            // arBroadcastStatus
+            // 
+            arBroadcastStatus.AutoSize = true;
+            arBroadcastStatus.Location = new System.Drawing.Point(57, 52);
+            arBroadcastStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            arBroadcastStatus.Name = "arBroadcastStatus";
+            arBroadcastStatus.Size = new System.Drawing.Size(202, 15);
+            arBroadcastStatus.TabIndex = 38;
+            arBroadcastStatus.Text = "waiting for user to input AR device IP";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label10.Location = new System.Drawing.Point(7, 45);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 13);
-            this.label10.TabIndex = 37;
-            this.label10.Text = "Status:";
+            label10.AutoSize = true;
+            label10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            label10.Location = new System.Drawing.Point(8, 52);
+            label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(42, 15);
+            label10.TabIndex = 37;
+            label10.Text = "Status:";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Location = new System.Drawing.Point(4, 140);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(337, 68);
-            this.groupBox3.TabIndex = 32;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Number of electrodes in the sensor";
+            groupBox3.Controls.Add(checkBox1);
+            groupBox3.Location = new System.Drawing.Point(5, 162);
+            groupBox3.Margin = new System.Windows.Forms.Padding(2);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Padding = new System.Windows.Forms.Padding(2);
+            groupBox3.Size = new System.Drawing.Size(393, 78);
+            groupBox3.TabIndex = 32;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Number of electrodes in the sensor";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.textBox1);
-            this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.textBox_C);
-            this.groupBox4.Controls.Add(this.textBox_factorA);
-            this.groupBox4.Controls.Add(this.textBox_factorB);
-            this.groupBox4.Controls.Add(this.textBox_STD);
-            this.groupBox4.Controls.Add(this.textBox_AVG);
-            this.groupBox4.Controls.Add(this.textBox_Y);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Location = new System.Drawing.Point(4, 211);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(335, 140);
-            this.groupBox4.TabIndex = 33;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Factors for processing";
+            groupBox4.Controls.Add(textBox1);
+            groupBox4.Controls.Add(label14);
+            groupBox4.Controls.Add(textBox_C);
+            groupBox4.Controls.Add(textBox_factorA);
+            groupBox4.Controls.Add(textBox_factorB);
+            groupBox4.Controls.Add(textBox_STD);
+            groupBox4.Controls.Add(textBox_AVG);
+            groupBox4.Controls.Add(textBox_Y);
+            groupBox4.Controls.Add(label8);
+            groupBox4.Controls.Add(label13);
+            groupBox4.Controls.Add(label9);
+            groupBox4.Controls.Add(label1);
+            groupBox4.Location = new System.Drawing.Point(5, 243);
+            groupBox4.Margin = new System.Windows.Forms.Padding(2);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            groupBox4.Size = new System.Drawing.Size(391, 162);
+            groupBox4.TabIndex = 33;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Factors for processing";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            textBox1.Location = new System.Drawing.Point(0, 0);
+            textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(116, 23);
+            textBox1.TabIndex = 0;
             // 
             // label14
             // 
-            this.label14.Location = new System.Drawing.Point(0, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(100, 23);
-            this.label14.TabIndex = 1;
+            label14.Location = new System.Drawing.Point(0, 0);
+            label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(117, 27);
+            label14.TabIndex = 1;
             // 
             // textBox_C
             // 
-            this.textBox_C.Location = new System.Drawing.Point(254, 22);
-            this.textBox_C.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_C.Name = "textBox_C";
-            this.textBox_C.Size = new System.Drawing.Size(76, 20);
-            this.textBox_C.TabIndex = 11;
-            this.textBox_C.Text = "1";
-            this.textBox_C.TextChanged += new System.EventHandler(this.textBox_C_TextChanged);
+            textBox_C.Location = new System.Drawing.Point(296, 25);
+            textBox_C.Margin = new System.Windows.Forms.Padding(2);
+            textBox_C.Name = "textBox_C";
+            textBox_C.Size = new System.Drawing.Size(88, 23);
+            textBox_C.TabIndex = 11;
+            textBox_C.Text = "1";
+            textBox_C.TextChanged += textBox_C_TextChanged;
             // 
             // textBox_STD
             // 
-            this.textBox_STD.Location = new System.Drawing.Point(242, 76);
-            this.textBox_STD.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_STD.Name = "textBox_STD";
-            this.textBox_STD.ReadOnly = true;
-            this.textBox_STD.Size = new System.Drawing.Size(88, 20);
-            this.textBox_STD.TabIndex = 4;
-            this.textBox_STD.TabStop = false;
+            textBox_STD.Location = new System.Drawing.Point(282, 88);
+            textBox_STD.Margin = new System.Windows.Forms.Padding(2);
+            textBox_STD.Name = "textBox_STD";
+            textBox_STD.ReadOnly = true;
+            textBox_STD.Size = new System.Drawing.Size(102, 23);
+            textBox_STD.TabIndex = 4;
+            textBox_STD.TabStop = false;
             // 
             // textBox_AVG
             // 
-            this.textBox_AVG.Location = new System.Drawing.Point(57, 76);
-            this.textBox_AVG.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_AVG.Name = "textBox_AVG";
-            this.textBox_AVG.ReadOnly = true;
-            this.textBox_AVG.Size = new System.Drawing.Size(88, 20);
-            this.textBox_AVG.TabIndex = 3;
-            this.textBox_AVG.TabStop = false;
+            textBox_AVG.Location = new System.Drawing.Point(66, 88);
+            textBox_AVG.Margin = new System.Windows.Forms.Padding(2);
+            textBox_AVG.Name = "textBox_AVG";
+            textBox_AVG.ReadOnly = true;
+            textBox_AVG.Size = new System.Drawing.Size(102, 23);
+            textBox_AVG.TabIndex = 3;
+            textBox_AVG.TabStop = false;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(166, 76);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 13);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "STD of RAW = ";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(194, 88);
+            label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(83, 15);
+            label8.TabIndex = 20;
+            label8.Text = "STD of RAW = ";
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(8, 107);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(156, 13);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Y =   C * X^2   +   A * X   +   B =";
+            label13.AutoSize = true;
+            label13.Location = new System.Drawing.Point(9, 123);
+            label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label13.Name = "label13";
+            label13.Size = new System.Drawing.Size(170, 15);
+            label13.TabIndex = 6;
+            label13.Text = "Y =   C * X^2   +   A * X   +   B =";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 76);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 13);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "X = AVG";
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(9, 88);
+            label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(50, 15);
+            label9.TabIndex = 5;
+            label9.Text = "X = AVG";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(212, 24);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "C (x^2)";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(247, 28);
+            label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(46, 15);
+            label1.TabIndex = 1;
+            label1.Text = "C (x^2)";
             // 
             // button4_STOP
             // 
-            this.button4_STOP.Enabled = false;
-            this.button4_STOP.Location = new System.Drawing.Point(176, 46);
-            this.button4_STOP.Margin = new System.Windows.Forms.Padding(2);
-            this.button4_STOP.Name = "button4_STOP";
-            this.button4_STOP.Size = new System.Drawing.Size(132, 26);
-            this.button4_STOP.TabIndex = 14;
-            this.button4_STOP.Text = "STOP";
-            this.button4_STOP.UseVisualStyleBackColor = true;
-            this.button4_STOP.Click += new System.EventHandler(this.button4_STOP_Click);
+            button4_STOP.Enabled = false;
+            button4_STOP.Location = new System.Drawing.Point(205, 53);
+            button4_STOP.Margin = new System.Windows.Forms.Padding(2);
+            button4_STOP.Name = "button4_STOP";
+            button4_STOP.Size = new System.Drawing.Size(154, 30);
+            button4_STOP.TabIndex = 14;
+            button4_STOP.Text = "STOP";
+            button4_STOP.UseVisualStyleBackColor = true;
+            button4_STOP.Click += button4_STOP_Click;
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Controls.Add(this.button4_STOP);
-            this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Controls.Add(this.textBox_TimeStep);
-            this.groupBox5.Controls.Add(this.button1_START);
-            this.groupBox5.Location = new System.Drawing.Point(4, 355);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Size = new System.Drawing.Size(337, 82);
-            this.groupBox5.TabIndex = 34;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Processing";
+            groupBox5.Controls.Add(label7);
+            groupBox5.Controls.Add(button4_STOP);
+            groupBox5.Controls.Add(label4);
+            groupBox5.Controls.Add(textBox_TimeStep);
+            groupBox5.Controls.Add(button1_START);
+            groupBox5.Location = new System.Drawing.Point(5, 410);
+            groupBox5.Margin = new System.Windows.Forms.Padding(2);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Padding = new System.Windows.Forms.Padding(2);
+            groupBox5.Size = new System.Drawing.Size(393, 95);
+            groupBox5.TabIndex = 34;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Processing";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(187, 22);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(20, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "ms";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(218, 25);
+            label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(23, 15);
+            label7.TabIndex = 2;
+            label7.Text = "ms";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 22);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(120, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Loop\'s step time interval";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(10, 25);
+            label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(136, 15);
+            label4.TabIndex = 1;
+            label4.Text = "Loop's step time interval";
             // 
             // textBox_TimeStep
             // 
-            this.textBox_TimeStep.Location = new System.Drawing.Point(130, 20);
-            this.textBox_TimeStep.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox_TimeStep.Name = "textBox_TimeStep";
-            this.textBox_TimeStep.Size = new System.Drawing.Size(52, 20);
-            this.textBox_TimeStep.TabIndex = 12;
-            this.textBox_TimeStep.Text = "300";
-            this.textBox_TimeStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_TimeStep.TextChanged += new System.EventHandler(this.textBox_TimeStep_TextChanged);
-            // 
-            // arServerIp
-            // 
-            this.arServerIp.AutoSize = true;
-            this.arServerIp.Location = new System.Drawing.Point(22, 24);
-            this.arServerIp.Name = "arServerIp";
-            this.arServerIp.Size = new System.Drawing.Size(64, 13);
-            this.arServerIp.TabIndex = 0;
-            this.arServerIp.Text = "192.168.1.0";
+            textBox_TimeStep.Location = new System.Drawing.Point(152, 23);
+            textBox_TimeStep.Margin = new System.Windows.Forms.Padding(2);
+            textBox_TimeStep.Name = "textBox_TimeStep";
+            textBox_TimeStep.Size = new System.Drawing.Size(60, 23);
+            textBox_TimeStep.TabIndex = 12;
+            textBox_TimeStep.Text = "300";
+            textBox_TimeStep.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            textBox_TimeStep.TextChanged += textBox_TimeStep_TextChanged;
             // 
             // errorBox
             // 
-            this.errorBox.Controls.Add(this.textBox_Error);
-            this.errorBox.Location = new System.Drawing.Point(7, 442);
-            this.errorBox.Name = "errorBox";
-            this.errorBox.Size = new System.Drawing.Size(200, 101);
-            this.errorBox.TabIndex = 37;
-            this.errorBox.TabStop = false;
-            this.errorBox.Text = "Last error";
+            errorBox.Controls.Add(textBox_Error);
+            errorBox.Location = new System.Drawing.Point(8, 510);
+            errorBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            errorBox.Name = "errorBox";
+            errorBox.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            errorBox.Size = new System.Drawing.Size(233, 117);
+            errorBox.TabIndex = 37;
+            errorBox.TabStop = false;
+            errorBox.Text = "Last error";
             // 
             // textBox_Error
             // 
-            this.textBox_Error.AutoSize = true;
-            this.textBox_Error.Location = new System.Drawing.Point(9, 20);
-            this.textBox_Error.Name = "textBox_Error";
-            this.textBox_Error.Size = new System.Drawing.Size(0, 13);
-            this.textBox_Error.TabIndex = 0;
-            // 
-            // arServerPort
-            // 
-            this.arServerPort.AutoSize = true;
-            this.arServerPort.Location = new System.Drawing.Point(144, 24);
-            this.arServerPort.Name = "arServerPort";
-            this.arServerPort.Size = new System.Drawing.Size(31, 13);
-            this.arServerPort.TabIndex = 39;
-            this.arServerPort.Text = "8080";
+            textBox_Error.AutoSize = true;
+            textBox_Error.Location = new System.Drawing.Point(10, 23);
+            textBox_Error.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            textBox_Error.Name = "textBox_Error";
+            textBox_Error.Size = new System.Drawing.Size(0, 15);
+            textBox_Error.TabIndex = 0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(345, 639);
-            this.Controls.Add(this.errorBox);
-            this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox_Electrodes);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.button_changeIP);
-            this.Controls.Add(this.textBox_port);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox_IP);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox4);
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form1";
-            this.Text = "DLL tester";
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.errorBox.ResumeLayout(false);
-            this.errorBox.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(402, 737);
+            Controls.Add(errorBox);
+            Controls.Add(groupBox5);
+            Controls.Add(label12);
+            Controls.Add(button2);
+            Controls.Add(textBox_Electrodes);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(button_changeIP);
+            Controls.Add(textBox_port);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(textBox_IP);
+            Controls.Add(groupBox1);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox4);
+            Margin = new System.Windows.Forms.Padding(2);
+            Name = "Form1";
+            Text = "DLL tester";
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
+            errorBox.ResumeLayout(false);
+            errorBox.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -578,12 +595,13 @@
         private System.Windows.Forms.TextBox textBox_AVG;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label arServerIp;
         private System.Windows.Forms.GroupBox errorBox;
         private System.Windows.Forms.Label textBox_Error;
-        private System.Windows.Forms.Label arAppSocketStatus;
+        private System.Windows.Forms.Label arBroadcastStatus;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label arServerPort;
+        private System.Windows.Forms.Label arBroadcastPort;
+        private System.Windows.Forms.TextBox arDeviceIp;
+        private System.Windows.Forms.Button startArBroadcast;
     }
 }
 

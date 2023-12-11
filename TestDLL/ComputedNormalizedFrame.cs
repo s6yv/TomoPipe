@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace RocsoleDataConverter
 {
-
     readonly struct RelevantCurrents
     {
         public readonly double[] inOppositeElectrodes; // electrodes 1 and 9, 2 and 10 ...
@@ -30,17 +29,17 @@ namespace RocsoleDataConverter
         }
     }
 
-    readonly struct GasCore
+    record GasCore
     {
-        public readonly double diameter;
-        public readonly int offsetAngle;
-        public readonly double offsetDistance;
+        public double diameter;
+        public double offsetAngle;
+        public double offsetDistance;
 
-        public GasCore(double diameter, int offsetAngle, double offsetDistance)
+        public GasCore(GasCore other)
         {
-            this.diameter = diameter;
-            this.offsetAngle = offsetAngle;
-            this.offsetDistance = offsetDistance;
+            diameter = other.diameter;
+            offsetAngle = other.offsetAngle;
+            offsetDistance = other.offsetDistance;
         }
     }
 
@@ -159,6 +158,15 @@ namespace RocsoleDataConverter
         public double GasCoreOffsetAngleDeg(){
             var id = ElectrodeIdClosestToGasCore();
             return id * 22.5;
+        }
+
+        public GasCore GetGasCore()
+        {
+            GasCore data = new();
+            data.diameter = GasCoreDiameter();
+            data.offsetDistance = DistanceOfGasCoreFromCentre();
+            data.offsetAngle = GasCoreOffsetAngleDeg();
+            return data;
         }
     }
 }

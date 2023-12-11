@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using TestDLL;
+using Windows.Networking.Vpn;
 
 namespace RocsoleDataConverter
 {
@@ -255,6 +256,8 @@ namespace RocsoleDataConverter
 
                     //                    string newmsg = sr.Read()
                     lastRocsoleFrame.FilterFrame(msg4processing, _ConsiderNormalizedData, _ElectrodesCount);
+                    var computed = lastRocsoleFrame.GetGasCore();
+                    arAppConnection.updateGasCore(computed);
                     if (_ConsiderNormalizedData)
                         Console.WriteLine("Received CurrentMeasurementNo = #" + lastRocsoleFrame.CurrentMeasurementNo + " TimeStamp: " + lastRocsoleFrame.TimeStamp + "; Average normalized= " + lastRocsoleFrame.lastFilteredAverage + "; StdDev normalized= " + lastRocsoleFrame.lastFilteredStdDev);
                     else

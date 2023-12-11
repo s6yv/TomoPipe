@@ -146,5 +146,10 @@ namespace RocsoleDataConverter
             return Math.Sqrt(variance);
         }
 
+        public GasCore GetGasCore()
+        {
+            var frame = new ComputedNormalizedFrame(ROCSOLE_raw.data);
+            return frame.GetGasCore();
+        }
     }
 }

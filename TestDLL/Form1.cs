@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Net.NetworkInformation;
-using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
 using RocsoleDataConverter;
@@ -20,8 +19,7 @@ namespace TestDLL
             
             textBox_IP.Text = converter.TomoKISStudioIP;
             textBox_port.Text = ""+converter.TomoKISStudioPort;
-            arServerIp.Text = converter.arAppConnection.ipAddress;
-            arServerPort.Text = ""+converter.arAppConnection.port;
+            arBroadcastPort.Text = ""+converter.arAppConnection.port;
             textBox_Electrodes.Text = ""+converter.ElectrodesCount;
             textBox_factorA.Text = ""+converter.FactorA;
             textBox_factorB.Text = ""+converter.FactorB;
@@ -198,6 +196,16 @@ namespace TestDLL
             {
                 textBox_Error.Text = ex.Message;
             }
+        }
+
+        private void onStartArBroadcast(object sender, EventArgs e)
+        {
+            arDeviceIp.Enabled = false;
+            startArBroadcast.Enabled = false;
+            arBroadcastStatus.Text = "Broadcasting gas core data";
+            
+            var deviceIp = arDeviceIp.Text;
+            converter.arAppConnection.startBroadcast(deviceIp);
         }
     }
 }
