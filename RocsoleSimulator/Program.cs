@@ -34,7 +34,7 @@ namespace RocsoleSimulator
             List<double> column0 = new List<double>();
             
 
-            using (Stream stream = File.Open(@"./out.txt", FileMode.Open))
+            using (Stream stream = File.Open(@"D:\Users\potat\OneDrive\Documents\work\PDP\rocsoledataconverter\!executable\out.txt", FileMode.Open))
                 //256 1800
             using (TextReader sr = new StreamReader(stream, Encoding.UTF8))
             {
@@ -301,7 +301,7 @@ namespace RocsoleSimulator
                     string a = json.Substring(0, 25);
                     string b = json.Substring(26);
                     json = json.Substring(0, 25) + index + json.Substring(26);
-                    Console.WriteLine($"testing {b}\n");
+                   // Console.WriteLine($"testing {b}\n");
                     index++; if (index == 10) index = 1;
                     sw.WriteLine(json);
                     sw.Flush();
